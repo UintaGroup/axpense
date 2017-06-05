@@ -28,10 +28,30 @@ build/Release
 
 # Dependency directories
 node_modules
+dist/
 jspm_packages
+.versions/
+.tmp/
 
 # Optional npm cache directory
 .npm
 
 # Optional REPL history
 .node_repl_history
+
+.DS_Store
+Thumbs.db
+
+UserInterfaceState.xcuserstate
+
+.idea/
+
+hooks/
+temp/
+tmp/
+www/
+plugins/
+plugins/android.json
+plugins/ios.json
+
+$RECYCLE.BIN/
