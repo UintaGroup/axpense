@@ -1,32 +1,32 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>{{ 'LIST_MASTER_TITLE' | translate }}</ion-title>
-
-    <ion-buttons end>
-      <button ion-button icon-only (click)="add()">
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>{{ 'REPORT_LIST' | translate }}</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="add()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
 
 </ion-header>
 
 <ion-content>
 
-  <ion-list>
-    <ion-item-sliding *ngFor="let r of reports">
-      <button ion-item (click)="open(r)">
-        <h2>{{r.name}}</h2>
-        <p>{{r.startDate}}-{{r.endDate}}</p>
-        <ion-note item-right *ngIf="r.description">{{r.description}}</ion-note>
-      </button>
+    <ion-list>
+        <ion-item-sliding *ngFor="let r of reports">
+            <button ion-item (click)="open(r)">
+                <h2>{{r.name}}</h2>
+                <p>{{r.startDate}} - {{r.endDate}}</p>
+                <ion-note item-right *ngIf="r.description">{{r.description}}</ion-note>
+            </button>
 
-      <ion-item-options>
-        <button ion-button color="danger" (click)="delete(r)">
-          {{ 'DELETE_BUTTON' | translate }}
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+            <ion-item-options>
+                <button ion-button color="danger" (click)="delete(r)">
+                    {{ 'DELETE_BUTTON' | translate }}
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+
 </ion-content>

@@ -58,6 +58,7 @@
   "ITEM_ABOUT_PLACEHOLDER" : "About",
 
   "DONE_BUTTON" : "Done",
+  "EDIT_BUTTON" : "Edit",
   "CANCEL_BUTTON" : "Cancel",
   "DELETE_BUTTON" : "Delete",
 
@@ -68,5 +69,11 @@
   "REPORT_CREATE_TITLE": "New Report",
   "REPORT_NAME_PLACEHOLDER": "Name",
   "REPORT_START_PLACEHOLDER": "Report Start",
-  "REPORT_END_PLACEHOLDER": "Report End"
+  "REPORT_END_PLACEHOLDER": "Report End",
+  "REPORT_LIST": "Reports",
+  "EXPENSE_LIST": "Expenses",
+  "EXPENSE_CREATE_TITLE": "Add Expense",
+  "EXPENSE_CATEGORY_PLACEHOLDER": "Category",
+  "EXPENSE_AMOUNT_PLACEHOLDER": "Amount",
+  "EXPENSE_DESCRIPTION_PLACEHOLDER": "Description"
 }

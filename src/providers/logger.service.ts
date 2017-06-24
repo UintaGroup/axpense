@@ -1,13 +1,11 @@
-import {Injectable} from '@angular/core';
-import { Toast } from '@ionic-native/toast';
+import { Injectable }       from '@angular/core';
+import { ToastController }  from 'ionic-angular';
 
 @Injectable()
 export class LoggerService {
 
-	constructor(private _toast: Toast) {
+	constructor(private _toastCtrl: ToastController) {
 	}
-
-	private window: any = <any>window;
 
 	public log(...args: any[]): void {
 		console.log(args);
@@ -15,20 +13,26 @@ export class LoggerService {
 
 	public error(message: string, data?: any): void {
 		console.error(message, data);
-		this.toast(message);
+		this.toast(message, 'toast-error');
 	}
 
 	public success(message: string): void {
-		console.info(message);
-		this.toast(message);
+		console.log(message);
+		this.toast(message, 'toast-success');
 	}
 
 	public warning(message: string, data?: any): void {
 		console.warn(message, data);
-		this.toast(message);
+		this.toast(message, 'toast-warn');
 	}
 
-	private toast(message: string): void {
-		this._toast.showLongTop(message);
+	private toast(message: string, cssClass?: string): Promise<any> {
+		let toast = this._toastCtrl.create({
+			message: message,
+			duration: 3000,
+			position: 'top',
+			cssClass: cssClass
+		});
+		return toast.present();
 	}
 }

@@ -1,30 +1,28 @@
 import { NgModule, ErrorHandler, Provider }         from '@angular/core';
 import { BrowserModule }                            from '@angular/platform-browser';
 import { Http }                                     from '@angular/http';
-import { Storage, IonicStorageModule }              from '@ionic/storage';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { Storage, IonicStorageModule }              from '@ionic/storage';
+import { NATIVE_PLUGINS }                           from './plugins';
+import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 
 import { App }                                      from './app.component';
-
 import { APP_PROVIDERS }                            from '../providers';
 import { Settings }                                 from '../providers/settings';
-import { SqlStore }                                 from '../providers/sql-store.service';
+import { RdbStore }                                 from '../providers/rdb-store.service';
 import { LocalDb }                                  from '../providers/local-db.service';
 import { QueryBuilderService }                      from '../providers/query-builder.service';
 
-
-import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
-import { NATIVE_PLUGINS }                           from './plugins';
 import { PAGES }                                    from '../pages';
 import { TABLES }                                   from '../config/db.config';
-import { SQLite } from '@ionic-native/sqlite';
+import { APP_CONFIG, CONFIG }                       from '../config/app.config';
 
 export function createTranslateLoader(http: Http) {
 	return new TranslateStaticLoader(http, './assets/i18n', '.json');
 }
 
-export function dbServiceFactory( sqlStore: SqlStore, storage: Storage, query: QueryBuilderService): LocalDb {
-	return new LocalDb(sqlStore, storage, query, TABLES);
+export function dbServiceFactory(storage: Storage, rdbStore: RdbStore, query: QueryBuilderService): LocalDb {
+	return new LocalDb(storage, rdbStore, query, TABLES);
 }
 
 export function provideSettingsFactory(storage: Storage) {
@@ -38,6 +36,9 @@ export function provideSettingsFactory(storage: Storage) {
 
 export function providers(): Provider[] {
 	return [
+		{provide: APP_CONFIG, useValue: CONFIG},
+		APP_PROVIDERS,
+		NATIVE_PLUGINS,
 		{
 			provide: Settings,
 			useFactory: provideSettingsFactory,
@@ -46,16 +47,12 @@ export function providers(): Provider[] {
 		{
 			provide: LocalDb,
 			useFactory: dbServiceFactory,
-			deps: [SqlStore]
+			deps: [Storage, RdbStore, QueryBuilderService]
 		},
 		{
 			provide: ErrorHandler,
 			useClass: IonicErrorHandler
-		},
-		SQLite,
-		Storage,
-		APP_PROVIDERS,
-		NATIVE_PLUGINS
+		}
 	];
 }
 
@@ -64,7 +61,9 @@ export function providers(): Provider[] {
 	imports: [
 		BrowserModule,
 		IonicModule.forRoot(App),
-		IonicStorageModule.forRoot(),
+		IonicStorageModule.forRoot({
+			name: '_axpensekv'
+		}),
 		TranslateModule.forRoot({
 			provide: TranslateLoader,
 			useFactory: (createTranslateLoader),

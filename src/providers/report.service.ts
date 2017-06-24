@@ -12,16 +12,16 @@ export class ReportService {
 
 	public all(): Promise<Report[]> {
 		return this._db.queryWithArrayResult('SELECT * FROM reports')
-		           .then(rows => rows.map(row => Report.create(row)));
+			.then(rows => rows.map(row => Report.create(row)));
 	}
 
 	public save(report: Report): Promise<Report> {
 		return this._db.insert(Report.tableName, report)
-		           .then(data => {
-			           let id: number = report.id > 0 ? report.id : data.res.insertId;
-			           report['_id'] = id;
-			           return report;
-		           });
+			.then(data => {
+				let id: number = report.id > 0 ? report.id : data.res.insertId;
+				report['_id'] = id;
+				return report;
+			});
 	}
 
 	public delete(report: Report): Promise<any> {

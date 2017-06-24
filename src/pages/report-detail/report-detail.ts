@@ -16,9 +16,12 @@ export class ReportDetailPage {
 
 	constructor(public navCtrl: NavController, navParams: NavParams, private _expenseSrvc: ExpenseService, private _modalCtrl: ModalController) {
 		this.report = navParams.get('report');
+		this.loadExpenses(this.report.id);
+	}
 
-		this._expenseSrvc.all(this.report.id)
-		    .then(expenses => this.expenses = expenses)
+	loadExpenses(reportId: number): Promise<any> {
+		return this._expenseSrvc.all(reportId)
+			.then(expenses => this.expenses = expenses);
 	}
 
 	add(): Promise<any> {
@@ -34,4 +37,10 @@ export class ReportDetailPage {
 		});
 		return addModal.present();
 	}
+
+	delete(expense: Expense): Promise<any> {
+		return this._expenseSrvc.delete(expense)
+			.then(() => this.loadExpenses(this.report.id));
+	}
+
 }

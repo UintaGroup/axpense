@@ -63,4 +63,22 @@ export class Expense {
 	public set categoryId(value: number) {
 		this._categoryId = value;
 	}
+
+	private _image: string;
+	public get image(): string {
+		return this._image;
+	}
+
+	public set image(value: string) {
+		this._image = value;
+	}
+
+	private _merchant: string;
+	public get merchant(): string {
+		return this._merchant;
+	}
+
+	public set merchant(value: string) {
+		this._merchant = value;
+	}
 }

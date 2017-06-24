@@ -1,22 +1,17 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-
-import { Api }      from './api';
-import { Category } from '../models';
+import { Injectable }   from '@angular/core';
+import { Observable }   from 'rxjs';
+import { Category }     from '../models';
+import { DropboxApi }   from './dropbox-api.service';
 
 @Injectable()
 export class CategoryService {
 
-  categories: Category[] = [
-    Category.create({id: 1, name: 'Transportation'}),
-    Category.create({id: 2, name: 'Meals'}),
-    Category.create({id: 3, name: 'Entertainment'}),
-    Category.create({id: 4, name: 'Misc'})
-  ];
+  constructor(private _api: DropboxApi) {}
 
-  constructor(public api: Api) {}
-
-  all$(): Observable<Category[]> {
-    return Observable.of(this.categories);
+  public all(): Observable<Category[]> {
+    return this._api.get('categories')
+		.map(r => r.json().map(x => new Category(x)))
+		.catch(() => Observable.throw('No Categories found.'));
   }
+
 }

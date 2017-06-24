@@ -1,21 +1,19 @@
 export class Category {
 
-	public static create(obj: any): Category {
-		let o = new Category();
-		for (let propName in obj) {
-			o['_' + propName] = obj[propName];
+	constructor(private data: any) {
+		for (let f in data) {
+			this['_' + f] = data[f];
 		}
-		return o;
 	}
 
 
-	private _id: number;
-	public get id(): number {
-		return this._id;
+	private _ledgerAccount: string;
+	public get ledgerAccount(): string {
+		return this._ledgerAccount;
 	}
 
-	public set id(value: number) {
-		this._id = value;
+	public set ledgerAccount(value: string) {
+		this._ledgerAccount = value;
 	}
 
 	private _name: string;
@@ -25,5 +23,14 @@ export class Category {
 
 	public set name(value: string) {
 		this._name = value;
+	}
+
+	private _description: string;
+	public get description(): string {
+		return this._description;
+	}
+
+	public set description(value: string) {
+		this._description = value;
 	}
 }
