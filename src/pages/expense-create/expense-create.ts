@@ -1,12 +1,13 @@
 import { Component }                            from '@angular/core';
 import { Validators, FormBuilder, FormGroup }   from '@angular/forms';
+import { Camera }                               from '@ionic-native/camera';
 import { ViewController }                       from 'ionic-angular';
-import { Expense }                               from '../../models';
-import { CategoryService } from '../../providers/category.service';
-import { Category } from '../../models/category.model';
-import { BasePage } from '../base.page';
-import { Observable } from 'rxjs/Observable';
-import { Camera } from '@ionic-native/camera';
+import { Observable }                           from 'rxjs/Observable';
+import { Expense, Category }                    from '../../models';
+import { CategoryService }                      from '../../providers';
+import { BasePage }                             from '../base.page';
+import { LoggerService } from '../../providers/logger.service';
+import { SettingsService } from '../../providers/settings.service';
 
 @Component({
 	selector: 'page-expense-create',
@@ -15,10 +16,17 @@ import { Camera } from '@ionic-native/camera';
 export class ExpenseCreatePage extends BasePage {
 
 	public categories$: Observable<Category[]>;
+	private _options: any;
 	public formValid: boolean;
 	public form: FormGroup;
+	public image: string;
 
-	constructor(public viewCtrl: ViewController, formBuilder: FormBuilder, categorySrvc: CategoryService, camera: Camera) {
+	constructor(public viewCtrl: ViewController,
+				formBuilder: FormBuilder,
+				categorySrvc: CategoryService,
+				private _settingSrv: SettingsService,
+				private _loggerSrvc: LoggerService,
+				private _camera: Camera) {
 		super();
 		this.categories$ = categorySrvc.all();
 		this.form = formBuilder.group({
@@ -26,21 +34,43 @@ export class ExpenseCreatePage extends BasePage {
 			amount: ['', Validators.required],
 			merchant: ['', Validators.required],
 			description: ['', Validators.required],
-			image: [''],
 			categoryId: ['', Validators.required]
 		});
+		this.loadSettings();
 
 		this.form.valueChanges.subscribe(v => this.formValid = this.form.valid);
 	}
 
-	public cancel(): any {
-		this.viewCtrl.dismiss();
+	addReceipt(): Promise<void> {
+		return this._camera.getPicture({
+				quality: this._options.receiptImageQuality,
+				destinationType: this._camera.DestinationType.DATA_URL,
+				encodingType: this._camera.EncodingType.JPEG,
+				mediaType: this._camera.MediaType.PICTURE
+			})
+			.then(imageData => this.image = 'data:image/jpeg;base64,' + imageData)
+			.catch(err => this._loggerSrvc.error(err))
 	}
 
-	public done(): any {
+	cancel(): Promise<any> {
+		return this.viewCtrl.dismiss();
+	}
+
+	done(): Promise<any>{
 		if (!this.form.valid) {
-			return;
+			return Promise.resolve();
+		} else {
+			let expense = Expense.create(this.form.value);
+			//TODO figure out more elegant solution to expense image.
+			expense.image = this.image;
+			return this.viewCtrl.dismiss(expense);
 		}
-		return this.viewCtrl.dismiss(Expense.create(this.form.value));
+	}
+
+	private loadSettings(): Promise<any> {
+		return this._settingSrv.load()
+			.then(() => {this._options = this._settingSrv.allSettings;
+				console.log('OPTIONS', this._options);
+		})
 	}
 }

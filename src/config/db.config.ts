@@ -21,10 +21,11 @@ export const TABLES = [
 			{ name: 'id', type: 'INTEGER PRIMARY KEY AUTOINCREMENT' },
 			{ name: 'reportId', type: 'INTEGER' },
 			{ name: 'categoryId', type: 'INTEGER' },
-			{ name: 'createdId', type: 'INTEGER' },
-			{ name: 'created', type: 'TEXT' },
 			{ name: 'amount', type: 'REAL' },
-			{ name: 'description', type: 'TEXT' }
+			{ name: 'image', type: 'TEXT' },
+			{ name: 'merchant', type: 'TEXT' },
+			{ name: 'description', type: 'TEXT' },
+			{ name: 'created', type: 'TEXT' }
 		]
 	}
 ];

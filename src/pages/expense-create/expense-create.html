@@ -1,20 +1,16 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>{{ 'EXPENSE_CREATE_TITLE' | translate }}</ion-title>
+        <ion-title>{{ 'TITLE.EXPENSE_CREATE' | translate }}</ion-title>
         <ion-buttons start>
             <button ion-button (click)="cancel()">
-        <span color="primary" showWhen="ios">
-          {{ 'CANCEL_BUTTON' | translate }}
-        </span>
+                <span color="primary" showWhen="ios">{{ 'CANCEL_BUTTON' | translate }}</span>
                 <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
             </button>
         </ion-buttons>
         <ion-buttons end>
             <button ion-button (click)="done()" [disabled]="!formValid" strong>
-        <span color="primary" showWhen="ios">
-          {{ 'DONE_BUTTON' | translate }}
-        </span>
+                <span color="primary" showWhen="ios">{{ 'DONE_BUTTON' | translate }}</span>
                 <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
             </button>
         </ion-buttons>
@@ -27,23 +23,29 @@
     <form *ngIf="form" [formGroup]="form" (ngSubmit)="createItem()">
         <ion-list>
             <ion-item>
-                <ion-input type="text" placeholder="{{ 'EXPENSE_MERCHANT_PLACEHOLDER' | translate}}"
+                <ion-input type="text" placeholder="{{ 'PLACEHOLDER.EXPENSE_MERCHANT' | translate}}"
                            formControlName="merchant"></ion-input>
             </ion-item>
             <ion-item>
-                <ion-label>{{'EXPENSE_CATEGORY_PLACEHOLDER' | translate}}</ion-label>
+                <ion-label>{{'PLACEHOLDER.EXPENSE_CATEGORY' | translate}}</ion-label>
                 <ion-select formControlName="categoryId">
                     <ion-option *ngFor="let c of categories$ | async" [value]="c.id">{{c.name}}</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item>
-                <ion-input type="number" placeholder="{{ 'EXPENSE_AMOUNT_PLACEHOLDER' | translate }}"
+                <ion-input type="number" placeholder="{{ 'PLACEHOLDER.EXPENSE_AMOUNT' | translate }}"
                            formControlName="amount"></ion-input>
             </ion-item>
             <ion-item>
-                <ion-textarea rows="5" placeholder="{{ 'EXPENSE_DESCRIPTION_PLACEHOLDER' | translate }}"
+                <ion-textarea rows="5" placeholder="{{ 'PLACEHOLDER.EXPENSE_DESCRIPTION' | translate }}"
                               formControlName="description"></ion-textarea>
+            </ion-item>
+            <ion-item *ngIf="image">
+                <img [src]="image"/>
             </ion-item>
         </ion-list>
     </form>
+    <ion-fab right bottom>
+        <button ion-fab color="light" (click)="addReceipt()"><ion-icon name="camera"></ion-icon></button>
+    </ion-fab>
 </ion-content>

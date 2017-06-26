@@ -1,0 +1,37 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{ 'TITLE.EXPENSES' | translate }}</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="add()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+        <ion-item-sliding *ngFor="let e of expenses">
+            <button ion-item (click)="open(e)">
+                <ion-row>
+                   <ion-col col-4>
+                       <h2>{{e.amount | currency: 'USD' : true : '.2-2' }}</h2>
+                       <p>{{e.created | date:'shortDate'}}</p>
+                   </ion-col>
+                    <ion-col col-8>
+                        <ion-note>{{e.description}}</ion-note>
+                    </ion-col>
+                </ion-row>
+            </button>
+            <ion-item-options>
+                <button ion-button color="danger" (click)="delete(e)">
+                    <ion-icon name="trash"></ion-icon>
+                    {{ 'BUTTON.DELETE' | translate }}
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+</ion-content>

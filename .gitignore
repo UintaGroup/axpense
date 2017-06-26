@@ -53,5 +53,6 @@ www/
 plugins/
 plugins/android.json
 plugins/ios.json
+platforms
 
 $RECYCLE.BIN/

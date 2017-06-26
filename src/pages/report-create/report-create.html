@@ -1,11 +1,11 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ 'REPORT_CREATE_TITLE' | translate }}</ion-title>
+    <ion-title>{{ 'TITLE.REPORT_CREATE' | translate }}</ion-title>
     <ion-buttons start>
       <button ion-button (click)="cancel()">
         <span color="primary" showWhen="ios">
-          {{ 'CANCEL_BUTTON' | translate }}
+          {{ 'BUTTON.CANCEL' | translate }}
         </span>
         <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
       </button>
@@ -13,7 +13,7 @@
     <ion-buttons end>
       <button ion-button (click)="done()" [disabled]="!formValid" strong>
         <span color="primary" showWhen="ios">
-          {{ 'DONE_BUTTON' | translate }}
+          {{ 'BUTTON.DONE' | translate }}
         </span>
         <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
       </button>
@@ -27,13 +27,13 @@
   <form *ngIf="form" [formGroup]="form" (ngSubmit)="createItem()">
     <ion-list>
       <ion-item>
-        <ion-input type="text" placeholder="{{ 'REPORT_NAME_PLACEHOLDER' | translate }}" formControlName="name"></ion-input>
+        <ion-input type="text" placeholder="{{ 'PLACEHOLDER.REPORT_NAME' | translate }}" formControlName="name"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-datetime placeholder="{{'REPORT_START_PLACEHOLDER' | translate}}" displayFormat="YYYY/MMM/DD" pickerFormat="YYYY/MMM/DD" formControlName="startDate"></ion-datetime>
+        <ion-datetime placeholder="{{'PLACEHOLDER.REPORT_START' | translate}}" displayFormat="YYYY/MMM/DD" pickerFormat="YYYY/MMM/DD" formControlName="startDate"></ion-datetime>
       </ion-item>
       <ion-item>
-        <ion-datetime placeholder="{{'REPORT_END_PLACEHOLDER' | translate}}" displayFormat="YYYY/MMM/DD" pickerFormat="YYYY/MMM/DD" formControlName="endDate"></ion-datetime>
+        <ion-datetime placeholder="{{'PLACEHOLDER.REPORT_END' | translate}}" displayFormat="YYYY/MMM/DD" pickerFormat="YYYY/MMM/DD" formControlName="endDate"></ion-datetime>
       </ion-item>
     </ion-list>
   </form>

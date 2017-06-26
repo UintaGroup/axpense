@@ -71,7 +71,7 @@ export class LocalDb {
 		}
 	}
 
-	public setupDb(reset?: boolean): Promise<any> {
+	public initialize(reset?: boolean): Promise<any> {
 		return this.resetDb(this._tables, reset)
 			.then(() => Promise.all(
 				this._tables

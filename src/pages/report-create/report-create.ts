@@ -1,6 +1,8 @@
 import { Component }                            from '@angular/core';
 import { Validators, FormBuilder, FormGroup }   from '@angular/forms';
 import { ViewController }                       from 'ionic-angular';
+import { DateService }                          from '../../common';
+import { SettingsService }                      from '../../providers';
 import { Report }                               from '../../models';
 
 @Component({
@@ -9,28 +11,44 @@ import { Report }                               from '../../models';
 })
 export class ReportCreatePage {
 
+	private _options: any;
+
 	public formValid: boolean;
 	public form: FormGroup;
 
-	constructor(public viewCtrl: ViewController, formBuilder: FormBuilder) {
+	constructor(private viewCtrl: ViewController,
+				formBuilder: FormBuilder,
+				settingsSrvc: SettingsService,
+				dateSrvc: DateService) {
+
+		this.loadSettings(settingsSrvc)
+			.then(() => this.buildForm(formBuilder, dateSrvc, this._options.reportDuration));
+	}
+
+	cancel(): any {
+		this.viewCtrl.dismiss();
+	}
+
+	done(): any {
+		if (!this.form.valid) {
+			return;
+		}
+		return this.viewCtrl.dismiss(Report.create(this.form.value));
+	}
+
+	buildForm(formBuilder: FormBuilder, dateService: DateService, dateOffset: number): any {
 		this.form = formBuilder.group({
 			name: ['', Validators.required],
-			created: [new Date(), Validators.required],
-			startDate: ['', Validators.required],
-			endDate: ['', Validators.required]
+			created: [dateService.now(), Validators.required],
+			startDate: [dateService.now(), Validators.required],
+			endDate: [dateService.addDays(dateOffset), Validators.required]
 		});
 
 		this.form.valueChanges.subscribe(v => this.formValid = this.form.valid);
 	}
 
-	public cancel(): any {
-		this.viewCtrl.dismiss();
-	}
-
-	public done(): any {
-		if (!this.form.valid) {
-			return;
-		}
-		return this.viewCtrl.dismiss(Report.create(this.form.value));
+	loadSettings(service: SettingsService): Promise<any> {
+		return service.load()
+			.then(() => this._options = service.allSettings);
 	}
 }

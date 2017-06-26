@@ -1,51 +1,42 @@
-<!--
-  Generated template for the Settings page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>{{ pageTitle }}</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <button ion-button menuToggle="left">
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>{{ 'TITLE.SETTINGS' | translate}}</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 <ion-content>
 
-  <form [formGroup]="form" *ngIf="settingsReady">
-    <ion-list *ngIf="page == 'main'">
-      <ion-item>
-        <ion-label>{{ 'SETTINGS_OPTION1' | translate }}</ion-label>
-        <ion-toggle formControlName="option1"></ion-toggle>
-      </ion-item>
+    <form *ngIf="settingsReady" [formGroup]="form">
 
-      <ion-item>
-        <ion-label>{{ 'SETTINGS_OPTION2' | translate }}</ion-label>
-        <ion-input formControlName="option2"></ion-input>
-      </ion-item>
+        <ion-list>
+            <ion-list-header color="light">
+                {{ 'LABEL.SETTINGS.REPORT' | translate }}
+            </ion-list-header>
+            <ion-item>
+                <ion-label>{{ 'LABEL.SETTINGS.REPORT_DURATION' | translate }}</ion-label>
+                <ion-range min="1" max="30" formControlName="reportDuration" color="primary" pin="true"></ion-range>
+            </ion-item>
+        </ion-list>
 
-      <ion-item>
-        <ion-label>{{ 'SETTINGS_OPTION3' | translate }}</ion-label>
-        <ion-select formControlName="option3">
-          <ion-option value="1" checked="true">1</ion-option>
-          <ion-option value="2">2</ion-option>
-          <ion-option value="3">3</ion-option>
-        </ion-select>
-      </ion-item>
+        <ion-list>
+            <ion-list-header color="light">
+                {{ 'LABEL.SETTINGS.RECEIPT' | translate}}
+            </ion-list-header>
+            <ion-item>
+                <ion-label>{{ 'LABEL.SETTINGS.RECEIPT_SAVE_GALLERY' | translate }} </ion-label>
+                <ion-toggle formControlName="saveReceiptToGallery"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label>{{ 'LABEL.SETTINGS.RECEIPT_IMAGE_QUALITY' | translate }}</ion-label>
+                <ion-range min="1" formControlName="receiptImageQuality" color="secondary" pin="true"></ion-range>
+            </ion-item>
+        </ion-list>
 
-      <button ion-item [navPush]="subSettings" [navParams]="profileSettings">
-        {{ 'SETTINGS_PROFILE_BUTTON' | translate }}
-      </button>
-    </ion-list>
-
-    <ion-list *ngIf="page == 'profile'">
-      <ion-item>
-        <ion-label>{{ 'SETTINGS_OPTION4' | translate }}</ion-label>
-        <ion-input formControlName="option4"></ion-input>
-      </ion-item>
-    </ion-list>
-  </form>
+    </form>
 
 </ion-content>

@@ -1,59 +1,58 @@
-import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { Component }                            from '@angular/core';
+import { FormBuilder, FormGroup, Validators }   from '@angular/forms';
+import { NavController, ToastController }       from 'ionic-angular';
+import { TranslateService }                     from '@ngx-translate/core';
 
-import { TranslateService } from 'ng2-translate/ng2-translate';
-
-import { MainPage } from '../index';
-import { User } from '../../providers/user';
-
-/*
-  Generated class for the Signup page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+import { MainPage }                             from '../index';
+import { Account }                              from '../../models';
+import { RegistrationService }                  from '../../providers';
+import { GlobalValidator } from '../../common/validators/global.validators';
 @Component({
-  selector: 'page-signup',
-  templateUrl: 'signup.html'
+	selector: 'page-signup',
+	templateUrl: './signup.html'
 })
 export class SignupPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
-  account: {name: string, email: string, password: string} = {
-    name: 'Test Human',
-    email: 'test@example.com',
-    password: 'test'
-  };
 
-  // Our translated text strings
-  private signupErrorString: string;
+	public form: FormGroup;
+	public formValid: boolean;
 
-  constructor(public navCtrl: NavController,
-              public user: User,
-              public toastCtrl: ToastController,
-              public translateService: TranslateService) {
+	private signupErrorString: string;
 
-    this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
-      this.signupErrorString = value;
-    })
-  }
+	constructor(private _navCtrl: NavController,
+		private _registrationSrvc: RegistrationService,
+		private _toastCtrl: ToastController,
+		formBuilder: FormBuilder,
+		translateSrvc: TranslateService) {
 
-  doSignup() {
-    // Attempt to login in through our User service
-    this.user.signup(this.account).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
-    }, (err) => {
+		translateSrvc.get('SIGNUP_ERROR').subscribe((value) => {
+			this.signupErrorString = value;
+		})
+		this.buildForm(formBuilder);
+	}
 
-      this.navCtrl.push(MainPage); // TODO: Remove this when you add your signup endpoint
+	buildForm(formBuilder: FormBuilder): any {
+		this.form = formBuilder.group({
+			name: ['', Validators.required],
+			email: ['', Validators.required, GlobalValidator.mailFormat],
+			password: ['', Validators.required],
+			passwordConfirm: ['', Validators.required]
+		});
 
-      // Unable to sign up
-      let toast = this.toastCtrl.create({
-        message: this.signupErrorString,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
-    });
-  }
+		this.form.valueChanges.subscribe(v => this.formValid = this.form.valid);
+	}
+
+	doSignup(account: Account) {
+		this._registrationSrvc.signUp(account)
+			.subscribe(resp => this._navCtrl.push(MainPage),
+				err => {
+					this._navCtrl.push(MainPage); // TODO: Remove this when you add your signup endpoint
+
+					let toast = this._toastCtrl.create({
+						message: this.signupErrorString,
+						duration: 3000,
+						position: 'top'
+					});
+					toast.present();
+				});
+	}
 }

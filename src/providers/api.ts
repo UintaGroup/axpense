@@ -3,14 +3,14 @@ import { Http, RequestOptions, URLSearchParams }  from '@angular/http';
 import { Observable }                             from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { Settings }                               from './settings';
+import { SettingsService }                               from './settings.service';
 
 @Injectable()
 export class Api {
   private url: string = 'https://example.com/api/v1';
 
 
-  constructor(private _http: Http, settings: Settings) {
+  constructor(private _http: Http, settings: SettingsService) {
   	// settings.getValue('apiUrl')
        //  .then(url => this.url = url);
   }

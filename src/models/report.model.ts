@@ -4,6 +4,10 @@ export class Report {
 
 	public static tableName: string = 'reports';
 
+	constructor() {
+
+	}
+
 	public static create(obj: any): Report {
 		let o = new Report();
 		for (let propName in obj) {

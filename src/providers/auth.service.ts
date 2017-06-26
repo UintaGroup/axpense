@@ -45,7 +45,7 @@ export class AuthService {
 		return this.getSession()
 			.then(session => {
 				this._events.publish(AppEvents.LOGOUT, session);
-				return this._db.setupDb(true);
+				return this._db.initialize(true);
 			});
 
 	}

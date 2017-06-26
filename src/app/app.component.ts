@@ -1,18 +1,14 @@
-import { Component, ViewChild }     from '@angular/core';
-import { Platform, Nav, Config, Events }    from 'ionic-angular';
-import { StatusBar }                from '@ionic-native/status-bar';
-import { SplashScreen }             from '@ionic-native/splash-screen';
+import { Component, ViewChild }                 from '@angular/core';
+import { Platform, Nav, Config, Events }        from 'ionic-angular';
+import { StatusBar }                            from '@ionic-native/status-bar';
+import { SplashScreen }                         from '@ionic-native/splash-screen';
+import { TranslateService }                     from '@ngx-translate/core';
 
-import { Settings }                 from '../providers';
-import { TranslateService }         from 'ng2-translate/ng2-translate';
-
-import { FirstRunPage }             from '../pages';
-import { LoginPage }                from '../pages';
-import { TutorialPage }             from '../pages';
-import { WelcomePage }              from '../pages';
-import { ReportListPage }           from '../pages';
-import { AuthService, LocalDb }     from '../providers';
-import { AppEvents }                from '../models';
+import { AuthService, LocalDb }                 from '../providers';
+import { AppEvents }                            from '../models';
+import { FirstRunPage, LoginPage, MainPage }    from '../pages';
+import { SettingsPage, ReportListPage }         from '../pages';
+import { SignupPage } from '../pages/signup/signup';
 
 
 @Component({
@@ -26,16 +22,18 @@ import { AppEvents }                from '../models';
 
             <ion-content>
                 <ion-list>
-                    <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-                        {{p.title}}
-                    </button>
+                    <ion-item menuClose *ngFor="let p of pages" (click)="openPage(p)">
+                        <ion-icon name="{{p.icon}}"></ion-icon> 
+                        {{p.title | translate}}
+                    </ion-item>
                 </ion-list>
             </ion-content>
             <ion-footer>
                 <ion-list>
-                    <button menuClose ion-item (click)="logout()">
-                        LOGOUT
-                    </button>
+                    <ion-item menuClose (click)="logout()">
+                        <ion-icon name="log-out"></ion-icon>
+                        {{'BUTTON.LOGOUT' | translate }}
+                    </ion-item>
                 </ion-list>
             </ion-footer>
         </ion-menu>
@@ -47,33 +45,40 @@ export class App {
 	@ViewChild(Nav) nav: Nav;
 
 	pages: any[] = [
-		{title: 'Tutorial', component: TutorialPage},
-		{title: 'Welcome', component: WelcomePage},
-		{title: 'Reports', component: ReportListPage},
-		{title: 'Login', component: LoginPage}
+		{icon: 'paper', title: 'TITLE.REPORT_LIST', component: ReportListPage},
+		{icon: 'contact', title: 'TITLE.SIGNUP', component: SignupPage},
+		{icon: 'cog', title: 'TITLE.SETTINGS', component: SettingsPage}
 	];
 
-	constructor(translate: TranslateService,
-		platform: Platform,
-		settings: Settings,
+	constructor(platform: Platform,
 		config: Config,
 		splashScreen: SplashScreen,
 		statusBar: StatusBar,
 		localDb: LocalDb,
-		public events: Events,
-		public authSrvc: AuthService) {
+		events: Events,
+		translateSrvc: TranslateService,
+		private _authSrvc: AuthService) {
 
-		translate.setDefaultLang('en');
-		translate.use('en');
-
-		this.eventRegistration();
-
-		translate.get(['BACK_BUTTON_TEXT']).subscribe(values => {
-			config.set('ios', 'backButtonText', values.BACK_BUTTON_TEXT);
-		});
+		this.initializeTranslations(config, translateSrvc);
+		this.eventRegistration(events);
 
 		platform.ready()
-			.then(() => localDb.setupDb())
+			.then(() => this.onReady(localDb, _authSrvc, statusBar, splashScreen));
+	}
+
+	openPage(page): Promise<any> {
+
+		return this.nav.setRoot(page.component);
+	}
+
+	logout(): Promise<any> {
+
+		return this._authSrvc.logout();
+	}
+
+	private onReady(localDb: LocalDb, authSrvc, statusBar: StatusBar, splashScreen: SplashScreen): Promise<any> {
+
+		return localDb.initialize()
 			.then(() => authSrvc.initializeSession())
 			.then(() => {
 				statusBar.styleDefault();
@@ -81,17 +86,19 @@ export class App {
 			});
 	}
 
-	public eventRegistration(): void {
-		this.events.subscribe(AppEvents.LOGOUT, () => this.openPage({component: LoginPage}));
-		this.events.subscribe(AppEvents.UNAUTHENTICATED, () => this.openPage({component: LoginPage}));
-		this.events.subscribe(AppEvents.AUTHENTICATED, () => this.openPage({component: FirstRunPage}));
+	private initializeTranslations(config: Config, service: TranslateService): any {
+
+		service.setDefaultLang('en');
+		service.use('en');
+
+		return service.get('BUTTON.BACK')
+			.subscribe(v => config.set('ios', 'backButtonText', v));
 	}
 
-	public openPage(page): any {
-		this.nav.setRoot(page.component);
-	}
+	private eventRegistration(events: Events): void {
 
-	public logout(): Promise<any> {
-		return this.authSrvc.logout();
+		events.subscribe(AppEvents.LOGOUT, () => this.openPage({component: LoginPage}));
+		events.subscribe(AppEvents.UNAUTHENTICATED, () => this.openPage({component: LoginPage}));
+		events.subscribe(AppEvents.AUTHENTICATED, () => this.openPage({component: MainPage}));
 	}
 }

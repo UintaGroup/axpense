@@ -1,44 +1,70 @@
 {
-  "BACK_BUTTON_TEXT" : "Back",
-
+  "BUTTON": {
+    "BACK": "Back",
+    "CANCEL": "Cancel",
+    "SIGNUP": "Sign Up",
+    "SIGNIN": "Sign In",
+    "DELETE": "Delete",
+    "SKIP": "Skip",
+    "LOGOUT": "LOGOUT",
+    "CONTINUE" : "Continue",
+    "SETTINGS": {
+      "PROFILE" : "Edit Profile"
+    }
+  },
+  "ERROR": {
+    "LOGIN": "Unable to sign in. Please check your account information and try again."
+  },
+  "PLACEHOLDER": {
+    "REPORT_NAME": "Name",
+    "REPORT_START": "Start Date",
+    "REPORT_END": "End Date",
+    "EXPENSE_MERCHANT": "Merchant",
+    "EXPENSE_CATEGORY": "Category",
+    "EXPENSE_AMOUNT": "Amount",
+    "EXPENSE_DESCRIPTION": "Description"
+  },
+  "TITLE": {
+    "REPORT_LIST": "Reports",
+    "REPORT_CREATE": "New Report",
+    "SETTINGS": "Settings",
+    "EXPENSE_CREATE": "Add Expense",
+    "EXPENSES": "Expenses",
+    "TABS": {
+      "REPORT_HEADER": "Report",
+      "REPORT_EXPENSES": "Expenses"
+    }
+  },
+  "LABEL": {
+    "WELCOME_INTRO" : "The starting point for your next great Ionic app",
+    "SETTINGS": {
+      "REPORT": "Reports",
+      "REPORT_DURATION": "Default Duration (days)",
+      "RECEIPT": "Receipts",
+      "RECEIPT_IMAGE_QUALITY": "Image Quality",
+      "RECEIPT_SAVE_GALLERY": "Save to Gallery"
+    }
+  },
+  "CONTENT": {
+    "REPORTS_LIST": {
+      "EMPTY": "No Reports"
+    },
+    "TUTORIAL": {
+      "SLIDE1_TITLE": "Welcome to the Ionic Super Starter",
+      "SLIDE1_DESCRIPTION": "The <b>Ionic Super Starter</b> is a fully-featured Ionic starter with many pre-built pages and best practices.",
+      "SLIDE2_TITLE": "How to use the Super Starter",
+      "SLIDE2_DESCRIPTION": "Assemble the various page types you want and remove the ones you don't. We've provided many common mobile app page layouts, like login and signup pages, tabs, and this tutorial page.",
+      "SLIDE3_TITLE": "Getting Started",
+      "SLIDE3_DESCRIPTION": "Need help? Check out the Super Starter README for a full tutorial",
+      "SLIDE4_TITLE": "Ready to Play?"
+    }
+  },
   "NAME": "Name",
   "EMAIL": "Email",
   "USERNAME": "Username",
   "PASSWORD": "Password",
   "LOGIN": "Sign in",
   "SIGNUP": "Sign up",
-
-  "TAB1_TITLE": "Items",
-  "TAB2_TITLE": "Search",
-  "TAB3_TITLE": "Settings",
-
-  "MAP_TITLE": "Map",
-
-  "TUTORIAL_SKIP_BUTTON" : "Skip",
-  "TUTORIAL_CONTINUE_BUTTON" : "Continue",
-
-  "TUTORIAL_SLIDE1_TITLE": "Welcome to the Ionic Super Starter",
-  "TUTORIAL_SLIDE1_DESCRIPTION": "The <b>Ionic Super Starter</b> is a fully-featured Ionic starter with many pre-built pages and best practices.",
-
-  "TUTORIAL_SLIDE2_TITLE": "How to use the Super Starter",
-  "TUTORIAL_SLIDE2_DESCRIPTION": "Assemble the various page types you want and remove the ones you don't. We've provided many common mobile app page layouts, like login and signup pages, tabs, and this tutorial page.",
-
-  "TUTORIAL_SLIDE3_TITLE": "Getting Started",
-  "TUTORIAL_SLIDE3_DESCRIPTION": "Need help? Check out the Super Starter README for a full tutorial",
-
-  "TUTORIAL_SLIDE4_TITLE": "Ready to Play?",
-
-  "WELCOME_INTRO" : "The starting point for your next great Ionic app",
-
-  "SETTINGS_TITLE": "Settings",
-  "SETTINGS_OPTION1": "Option 1",
-  "SETTINGS_OPTION2": "Option 2",
-  "SETTINGS_OPTION3": "Option 3",
-  "SETTINGS_OPTION4": "Option 4",
-
-  "SETTINGS_PROFILE_BUTTON" : "Edit Profile",
-
-  "SETTINGS_PAGE_PROFILE": "Edit Profile",
 
   "WELCOME_TITLE": "Welcome",
 
@@ -65,15 +91,5 @@
   "CARDS_TITLE": "Social",
 
   "SEARCH_TITLE": "Search",
-  "SEARCH_PLACEHOLDER" : "Search the items list, e.g. \"Donald Duck\"",
-  "REPORT_CREATE_TITLE": "New Report",
-  "REPORT_NAME_PLACEHOLDER": "Name",
-  "REPORT_START_PLACEHOLDER": "Report Start",
-  "REPORT_END_PLACEHOLDER": "Report End",
-  "REPORT_LIST": "Reports",
-  "EXPENSE_LIST": "Expenses",
-  "EXPENSE_CREATE_TITLE": "Add Expense",
-  "EXPENSE_CATEGORY_PLACEHOLDER": "Category",
-  "EXPENSE_AMOUNT_PLACEHOLDER": "Amount",
-  "EXPENSE_DESCRIPTION_PLACEHOLDER": "Description"
+  "SEARCH_PLACEHOLDER" : "Search the items list, e.g. \"Donald Duck\""
 }

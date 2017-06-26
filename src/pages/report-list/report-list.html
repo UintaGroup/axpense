@@ -1,7 +1,10 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>{{ 'REPORT_LIST' | translate }}</ion-title>
+        <button ion-button menuToggle="left">
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>{{ 'TITLE.REPORT_LIST' | translate }}</ion-title>
         <ion-buttons end>
             <button ion-button icon-only (click)="add()">
                 <ion-icon name="add"></ion-icon>
@@ -14,16 +17,20 @@
 <ion-content>
 
     <ion-list>
-        <ion-item-sliding *ngFor="let r of reports">
+        <ion-item *ngIf="((reports | async)?.length < 1) || !reports">
+            <h2>{{'CONTENT.REPORTS_LIST.EMPTY' | translate}}</h2>
+        </ion-item>
+        <ion-item-sliding *ngFor="let r of reports | async">
             <button ion-item (click)="open(r)">
                 <h2>{{r.name}}</h2>
-                <p>{{r.startDate}} - {{r.endDate}}</p>
+                <p>{{r.startDate | date: 'yyyy/MM/dd'}} - {{r.endDate | date: 'yyyy/MM/dd'}}</p>
                 <ion-note item-right *ngIf="r.description">{{r.description}}</ion-note>
             </button>
 
             <ion-item-options>
                 <button ion-button color="danger" (click)="delete(r)">
-                    {{ 'DELETE_BUTTON' | translate }}
+                    <ion-icon name="trash"></ion-icon>
+                    {{ 'BUTTON.DELETE' | translate }}
                 </button>
             </ion-item-options>
         </ion-item-sliding>

@@ -1,24 +1,21 @@
 import { NgModule, ErrorHandler, Provider }         from '@angular/core';
 import { BrowserModule }                            from '@angular/platform-browser';
-import { Http }                                     from '@angular/http';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { Http, HttpModule }                         from '@angular/http';
 import { Storage, IonicStorageModule }              from '@ionic/storage';
-import { NATIVE_PLUGINS }                           from './plugins';
-import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { TranslateModule, TranslateLoader }         from '@ngx-translate/core';
+import { TranslateHttpLoader }                      from '@ngx-translate/http-loader';
+import { CommonModule }                             from '../common';
 
 import { App }                                      from './app.component';
-import { APP_PROVIDERS }                            from '../providers';
-import { Settings }                                 from '../providers/settings';
-import { RdbStore }                                 from '../providers/rdb-store.service';
-import { LocalDb }                                  from '../providers/local-db.service';
-import { QueryBuilderService }                      from '../providers/query-builder.service';
-
+import { NATIVE_PLUGINS }                           from './plugins';
 import { PAGES }                                    from '../pages';
+import { APP_PROVIDERS, SettingsService, RdbStore, LocalDb, QueryBuilderService } from '../providers';
 import { TABLES }                                   from '../config/db.config';
 import { APP_CONFIG, CONFIG }                       from '../config/app.config';
 
 export function createTranslateLoader(http: Http) {
-	return new TranslateStaticLoader(http, './assets/i18n', '.json');
+	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 export function dbServiceFactory(storage: Storage, rdbStore: RdbStore, query: QueryBuilderService): LocalDb {
@@ -26,11 +23,10 @@ export function dbServiceFactory(storage: Storage, rdbStore: RdbStore, query: Qu
 }
 
 export function provideSettingsFactory(storage: Storage) {
-	return new Settings(storage, {
-		option1: true,
-		option2: 'Ionitron J. Framework',
-		option3: '3',
-		option4: 'Hello'
+	return new SettingsService(storage, {
+		receiptImageQuality: 50,
+		saveReceiptToGallery: false,
+		reportDuration: 7,
 	});
 }
 
@@ -40,7 +36,7 @@ export function providers(): Provider[] {
 		APP_PROVIDERS,
 		NATIVE_PLUGINS,
 		{
-			provide: Settings,
+			provide: SettingsService,
 			useFactory: provideSettingsFactory,
 			deps: [Storage]
 		},
@@ -60,14 +56,18 @@ export function providers(): Provider[] {
 	declarations: [App, PAGES],
 	imports: [
 		BrowserModule,
+		CommonModule,
+		HttpModule,
 		IonicModule.forRoot(App),
 		IonicStorageModule.forRoot({
 			name: '_axpensekv'
 		}),
 		TranslateModule.forRoot({
-			provide: TranslateLoader,
-			useFactory: (createTranslateLoader),
-			deps: [Http]
+			loader: {
+				provide: TranslateLoader,
+				useFactory: (createTranslateLoader),
+				deps: [Http]
+			}
 		})
 	],
 	bootstrap: [IonicApp],

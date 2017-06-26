@@ -1,0 +1,22 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{ report.name }}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+    <ion-list>
+        <ion-card>
+            <ion-card-header>
+                {{report.startDate| date:'yyyy/MM/dd'}} - {{report.endDate | date:'yyyy/MM/dd'}}
+            </ion-card-header>
+            <ion-card-content>
+                <p>{{report.created | date:'shortDate'}}</p>
+            </ion-card-content>
+        </ion-card>
+    </ion-list>
+
+</ion-content>
