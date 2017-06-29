@@ -1,3 +1,5 @@
+import { Component }            from '@angular/core';
+
 import { ReportListPage }       from './report-list/report-list';
 import { SettingsPage }         from './settings/settings';
 import { LoginPage }            from './login/login';
@@ -9,8 +11,8 @@ import { ExpenseCreatePage }    from './expense-create/expense-create';
 import { ReportDetailTabsPage } from './report-detail-tabs/report-detail-tabs';
 import { ExpenseDetailPage }    from './expense-detail/expense-detail';
 
-export const MainPage = ReportListPage;
-export const FirstRunPage = TutorialPage;
+export const MAIN_PAGE: Component = ReportListPage;
+export const FIRST_RUN_PAGE: Component = TutorialPage;
 
 export {
 	LoginPage,
@@ -23,9 +25,9 @@ export {
 	ExpenseCreatePage,
 	ExpenseDetailPage,
 	ReportDetailTabsPage
-}
+};
 
-export const PAGES = [
+export const PAGES: any[] = [
 	LoginPage,
 	SignupPage,
 	TutorialPage,

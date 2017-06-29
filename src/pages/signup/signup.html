@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ 'SIGNUP_TITLE' | translate }}</ion-title>
+    <ion-title>{{ 'TITLE.SIGNUP' | translate }}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -12,27 +12,27 @@
     <ion-list>
 
       <ion-item>
-        <ion-label fixed>{{ 'NAME' | translate }}</ion-label>
+        <ion-label fixed>{{ 'LABEL.NAME' | translate }}</ion-label>
         <ion-input type="text" formControlName="name" name="name"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
+        <ion-label fixed>{{ 'LABEL.EMAIL' | translate }}</ion-label>
         <ion-input type="email" formControlName="email" name="email"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
+        <ion-label fixed>{{ 'LABEL.PASSWORD' | translate }}</ion-label>
         <ion-input type="password" formControlName="password" name="password"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
+        <ion-label fixed>{{ 'LABEL.PASSWORD' | translate }}</ion-label>
         <ion-input type="passwordConfirm" formControlName="passwordConfirm" name="passwordConfirm"></ion-input>
       </ion-item>
 
       <div padding>
-        <button type="submit" [disabled]="!formValid" ion-button color="primary" block>{{ 'SIGNUP_BUTTON' | translate }}</button>
+        <button type="submit" [disabled]="!formValid" ion-button color="primary" block>{{ 'BUTTON.SIGNUP' | translate }}</button>
       </div>
 
     </ion-list>

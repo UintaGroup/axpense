@@ -3,14 +3,15 @@ import { IonicPageModule } from 'ionic-angular';
 import { ExpenseDetailPage } from './expense-detail';
 
 @NgModule({
-  declarations: [
-    ExpenseDetailPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(ExpenseDetailPage),
-  ],
-  exports: [
-    ExpenseDetailPage
-  ]
+	declarations: [
+		ExpenseDetailPage,
+	],
+	imports: [
+		IonicPageModule.forChild(ExpenseDetailPage),
+	],
+	exports: [
+		ExpenseDetailPage
+	]
 })
-export class ExpenseDetailPageModule {}
+export class ExpenseDetailPageModule {
+}

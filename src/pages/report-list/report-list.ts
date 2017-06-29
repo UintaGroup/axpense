@@ -1,11 +1,11 @@
 import { Component }                        from '@angular/core';
-import { NavController, ModalController }   from 'ionic-angular';
+import { NavController, ModalController, Modal }   from 'ionic-angular';
+import { Observable }                       from 'rxjs/Observable';
 
 import { Report }                           from '../../models';
 import { ReportService }                    from '../../providers';
 import { ReportCreatePage }                 from '../report-create/report-create';
-import { ReportDetailTabsPage } from '../report-detail-tabs/report-detail-tabs';
-import { Observable } from 'rxjs/Observable';
+import { ReportDetailTabsPage }             from '../report-detail-tabs/report-detail-tabs';
 
 @Component({
 	selector: 'report-list-page',
@@ -20,12 +20,12 @@ export class ReportListPage {
 		this.init();
 	}
 
-	init(): void {
+	public init(): void {
 		this.reports = this._reportSrvc.all$();
 	}
 
-	add(): Promise<void> {
-		let addModal = this.modalCtrl.create(ReportCreatePage);
+	public add(): Promise<void> {
+		let addModal:Modal = this.modalCtrl.create(ReportCreatePage);
 		addModal.onDidDismiss(report => {
 			if (report) {
 				return this._reportSrvc.save(report)
@@ -37,12 +37,12 @@ export class ReportListPage {
 		return addModal.present();
 	}
 
-	delete(report: Report): Promise<void> {
+	public delete(report: Report): Promise<void> {
 		return this._reportSrvc.delete(report)
 							.then(() => this.init());
 	}
 
-	open(report: Report): Promise<void> {
+	public open(report: Report): Promise<void> {
 		return this.navCtrl.push(ReportDetailTabsPage, {
 			report: report
 		});

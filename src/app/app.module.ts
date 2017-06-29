@@ -14,7 +14,7 @@ import { APP_PROVIDERS, SettingsService, RdbStore, LocalDb, QueryBuilderService 
 import { TABLES }                                   from '../config/db.config';
 import { APP_CONFIG, CONFIG }                       from '../config/app.config';
 
-export function createTranslateLoader(http: Http) {
+export function createTranslateLoader(http: Http): TranslateHttpLoader {
 	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
@@ -22,7 +22,7 @@ export function dbServiceFactory(storage: Storage, rdbStore: RdbStore, query: Qu
 	return new LocalDb(storage, rdbStore, query, TABLES);
 }
 
-export function provideSettingsFactory(storage: Storage) {
+export function provideSettingsFactory(storage: Storage): SettingsService {
 	return new SettingsService(storage, {
 		receiptImageQuality: 50,
 		saveReceiptToGallery: false,
