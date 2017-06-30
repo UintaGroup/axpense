@@ -23,12 +23,12 @@ export class TutorialPage {
   showSkip = true;
 
   constructor(public navCtrl: NavController, public menu: MenuController, translate: TranslateService) {
-    translate.get(["CONTENT.TUTORIAL.SLIDE1_TITLE",
-                   "CONTENT.TUTORIAL.SLIDE1_DESCRIPTION",
-                   "CONTENT.TUTORIAL.SLIDE2_TITLE",
-                   "CONTENT.TUTORIAL.SLIDE2_DESCRIPTION",
-                   "CONTENT.TUTORIAL.SLIDE3_TITLE",
-                   "CONTENT.TUTORIAL.SLIDE3_DESCRIPTION",
+    translate.get(['CONTENT.TUTORIAL.SLIDE1_TITLE',
+                   'CONTENT.TUTORIAL.SLIDE1_DESCRIPTION',
+                   'CONTENT.TUTORIAL.SLIDE2_TITLE',
+                   'CONTENT.TUTORIAL.SLIDE2_DESCRIPTION',
+                   'CONTENT.TUTORIAL.SLIDE3_TITLE',
+                   'CONTENT.TUTORIAL.SLIDE3_DESCRIPTION',
     ])
     .subscribe(values => {
       this.slides = [

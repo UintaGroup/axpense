@@ -1,21 +1,17 @@
-import { Component }                            from '@angular/core';
-import { IonicPage, NavController, NavParams }  from 'ionic-angular';
-import { Expense }                              from '../../models';
+import { Component }            from '@angular/core';
+import { IonicPage, NavParams } from 'ionic-angular';
+import { Expense }              from '../../models';
 
 @IonicPage()
 @Component({
 	selector: 'page-expense-detail',
-	templateUrl: 'expense-detail.html',
+	templateUrl: './expense-detail.html',
 })
 export class ExpenseDetailPage {
 
 	public expense: Expense;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams) {
+	constructor(navParams: NavParams) {
 		this.expense = navParams.data.expense;
-	}
-
-	ionViewDidLoad() {
-		console.log('VIEWING EXPENSE', this.expense);
 	}
 }

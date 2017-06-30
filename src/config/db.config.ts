@@ -1,7 +1,7 @@
 import { Expense } from '../models/expense.model';
 import { Report } from '../models/report.model';
 
-export const TABLES = [
+export const TABLES: any[] = [
 	{
 		name: Report.tableName,
 		sync: false,

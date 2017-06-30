@@ -2,6 +2,8 @@
   "BUTTON": {
     "BACK": "Back",
     "CANCEL": "Cancel",
+    "DONE": "Done",
+    "EDIT": "Edit",
     "SIGNUP": "Sign Up",
     "SIGNIN": "Sign In",
     "DELETE": "Delete",
@@ -25,17 +27,23 @@
     "EXPENSE_DESCRIPTION": "Description"
   },
   "TITLE": {
+    "LOGIN": "Sign in",
     "REPORT_LIST": "Reports",
     "REPORT_CREATE": "New Report",
     "SETTINGS": "Settings",
     "EXPENSE_CREATE": "Add Expense",
     "EXPENSES": "Expenses",
+    "PASSWORD": "Password",
+    "SIGNUP": "Sign Up",
     "TABS": {
       "REPORT_HEADER": "Report",
       "REPORT_EXPENSES": "Expenses"
     }
   },
   "LABEL": {
+    "NAME": "Name",
+    "EMAIL": "Email",
+    "USERNAME": "Username",
     "WELCOME_INTRO" : "The starting point for your next great Ionic app",
     "SETTINGS": {
       "REPORT": "Reports",
@@ -58,38 +66,5 @@
       "SLIDE3_DESCRIPTION": "Need help? Check out the Super Starter README for a full tutorial",
       "SLIDE4_TITLE": "Ready to Play?"
     }
-  },
-  "NAME": "Name",
-  "EMAIL": "Email",
-  "USERNAME": "Username",
-  "PASSWORD": "Password",
-  "LOGIN": "Sign in",
-  "SIGNUP": "Sign up",
-
-  "WELCOME_TITLE": "Welcome",
-
-  "LOGIN_TITLE": "Sign in",
-  "LOGIN_ERROR": "Unable to sign in. Please check your account information and try again.",
-  "LOGIN_BUTTON": "Sign in",
-  "SIGNUP_TITLE": "Sign up",
-  "SIGNUP_ERROR": "Unable to create account. Please check your account information and try again.",
-  "SIGNUP_BUTTON": "Sign up",
-
-  "LIST_MASTER_TITLE": "Items",
-
-  "ITEM_CREATE_TITLE": "New Item",
-  "ITEM_CREATE_CHOOSE_IMAGE": "Add Image",
-
-  "ITEM_NAME_PLACEHOLDER" : "Name",
-  "ITEM_ABOUT_PLACEHOLDER" : "About",
-
-  "DONE_BUTTON" : "Done",
-  "EDIT_BUTTON" : "Edit",
-  "CANCEL_BUTTON" : "Cancel",
-  "DELETE_BUTTON" : "Delete",
-
-  "CARDS_TITLE": "Social",
-
-  "SEARCH_TITLE": "Search",
-  "SEARCH_PLACEHOLDER" : "Search the items list, e.g. \"Donald Duck\""
+  }
 }

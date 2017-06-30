@@ -4,13 +4,13 @@
         <ion-title>{{ 'TITLE.EXPENSE_CREATE' | translate }}</ion-title>
         <ion-buttons start>
             <button ion-button (click)="cancel()">
-                <span color="primary" showWhen="ios">{{ 'CANCEL_BUTTON' | translate }}</span>
+                <span color="primary" showWhen="ios">{{ 'BUTTON.CANCEL' | translate }}</span>
                 <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
             </button>
         </ion-buttons>
         <ion-buttons end>
             <button ion-button (click)="done()" [disabled]="!formValid" strong>
-                <span color="primary" showWhen="ios">{{ 'DONE_BUTTON' | translate }}</span>
+                <span color="primary" showWhen="ios">{{ 'BUTTON.DONE' | translate }}</span>
                 <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
             </button>
         </ion-buttons>

@@ -7,7 +7,7 @@ import { AuthService } from '../../providers';
 
 @Component({
 	selector: 'page-login',
-	templateUrl: 'login.html'
+	templateUrl: './login.html'
 })
 export class LoginPage {
 
@@ -17,6 +17,10 @@ export class LoginPage {
 	};
 
 	private loginErrorString: string;
+
+
+
+
 
 	constructor(private _authSrvc: AuthService,
 		private _toastCtrl: ToastController,

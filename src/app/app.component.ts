@@ -10,7 +10,6 @@ import { FirstRunPage, LoginPage, MainPage }    from '../pages';
 import { SettingsPage, ReportListPage }         from '../pages';
 import { SignupPage } from '../pages/signup/signup';
 
-
 @Component({
 	template: `
         <ion-menu [content]="content">
@@ -23,7 +22,7 @@ import { SignupPage } from '../pages/signup/signup';
             <ion-content>
                 <ion-list>
                     <ion-item menuClose *ngFor="let p of pages" (click)="openPage(p)">
-                        <ion-icon name="{{p.icon}}"></ion-icon> 
+                        <ion-icon name="{{p.icon}}"></ion-icon>
                         {{p.title | translate}}
                     </ion-item>
                 </ion-list>
@@ -40,11 +39,12 @@ import { SignupPage } from '../pages/signup/signup';
         <ion-nav #content [root]="rootPage"></ion-nav>`
 })
 export class App {
-	rootPage = FirstRunPage;
+	public rootPage: Component = FirstRunPage;
 
-	@ViewChild(Nav) nav: Nav;
+	@ViewChild(Nav)
+	public nav: Nav;
 
-	pages: any[] = [
+	public pages: any[] = [
 		{icon: 'paper', title: 'TITLE.REPORT_LIST', component: ReportListPage},
 		{icon: 'contact', title: 'TITLE.SIGNUP', component: SignupPage},
 		{icon: 'cog', title: 'TITLE.SETTINGS', component: SettingsPage}
@@ -66,17 +66,17 @@ export class App {
 			.then(() => this.onReady(localDb, _authSrvc, statusBar, splashScreen));
 	}
 
-	openPage(page): Promise<any> {
+	public openPage(page: any): Promise<any> {
 
 		return this.nav.setRoot(page.component);
 	}
 
-	logout(): Promise<any> {
+	public logout(): Promise<any> {
 
 		return this._authSrvc.logout();
 	}
 
-	private onReady(localDb: LocalDb, authSrvc, statusBar: StatusBar, splashScreen: SplashScreen): Promise<any> {
+	private onReady(localDb: LocalDb, authSrvc: AuthService, statusBar: StatusBar, splashScreen: SplashScreen): Promise<any> {
 
 		return localDb.initialize()
 			.then(() => authSrvc.initializeSession())

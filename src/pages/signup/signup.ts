@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators }   from '@angular/forms';
 import { NavController, ToastController }       from 'ionic-angular';
 import { TranslateService }                     from '@ngx-translate/core';
 
-import { MainPage }                             from '../index';
+import { MAIN_PAGE }                             from '../index';
 import { Account }                              from '../../models';
 import { RegistrationService }                  from '../../providers';
 import { GlobalValidator } from '../../common/validators/global.validators';
@@ -43,9 +43,9 @@ export class SignupPage {
 
 	doSignup(account: Account) {
 		this._registrationSrvc.signUp(account)
-			.subscribe(resp => this._navCtrl.push(MainPage),
+			.subscribe(resp => this._navCtrl.push(MAIN_PAGE),
 				err => {
-					this._navCtrl.push(MainPage); // TODO: Remove this when you add your signup endpoint
+					this._navCtrl.push(MAIN_PAGE); // TODO: Remove this when you add your signup endpoint
 
 					let toast = this._toastCtrl.create({
 						message: this.signupErrorString,

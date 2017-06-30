@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
-import { Report } from '../../models/report.model';
-import { ExpenseCreatePage } from '../expense-create/expense-create';
-import { Expense } from '../../models/expense.model';
-import { ExpenseService } from '../../providers/expense.service';
-import { ExpenseDetailPage } from '../expense-detail/expense-detail';
+import { Component }                                                    from '@angular/core';
+import { IonicPage, Modal, ModalController, NavController, NavParams }  from 'ionic-angular';
+import { Expense, Report }                                              from '../../models';
+import { ExpenseService }                                               from '../../providers';
+import { ExpenseDetailPage }                                            from '../expense-detail/expense-detail';
+import { ExpenseCreatePage }                                            from '../expense-create/expense-create';
 
 @IonicPage()
 @Component({
@@ -13,8 +12,8 @@ import { ExpenseDetailPage } from '../expense-detail/expense-detail';
 })
 export class ReportExpensesTabPage {
 
-	report: Report;
-	expenses: Expense[] = [];
+	public report: Report;
+	public expenses: Expense[] = [];
 
 	constructor(private _navParams: NavParams,
 				private _navCtrl: NavController,
@@ -24,17 +23,17 @@ export class ReportExpensesTabPage {
 		this.loadExpenses(this.report.id);
 	}
 
-	loadExpenses(reportId: number): Promise<any> {
+	public loadExpenses(reportId: number): Promise<any> {
 		return this._expenseSrvc.all(reportId)
 			.then(expenses => this.expenses = expenses);
 	}
 
-	open(expense: Expense): Promise<any> {
+	public open(expense: Expense): Promise<any> {
 		return this._navCtrl.push(ExpenseDetailPage, {expense: expense});
 	}
 
-	add(): Promise<any> {
-		let addModal = this._modalCtrl.create(ExpenseCreatePage);
+	public add(): Promise<any> {
+		let addModal: Modal = this._modalCtrl.create(ExpenseCreatePage);
 
 		addModal.onDidDismiss(expense => {
 			if(expense) {
@@ -45,7 +44,7 @@ export class ReportExpensesTabPage {
 		return addModal.present();
 	}
 
-	delete(expense: Expense): Promise<any> {
+	public delete(expense: Expense): Promise<any> {
 		return this._expenseSrvc.delete(expense)
 			.then(() => this.loadExpenses(this.report.id));
 	}

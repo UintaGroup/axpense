@@ -22,12 +22,12 @@ export class RdbStore {
 			return Promise.resolve();
 		}
 		if (win.sqlitePlugin) {
-			let db = new SQLite();
+			let db: SQLite = new SQLite();
 			return db.create({
 					name: DB_NAME,
 					location: 'default'
 				})
-				.then(db => this._db = db);
+				.then(d => this._db = d);
 		} else {
 			console.warn('Storage: SQLite plugin not installed, falling back to WebSQL. Make sure to install cordova-sqlite-storage in production!');
 			this._db = win.openDatabase(DB_NAME, '1.0', 'database', 5 * 1024 * 1024);
