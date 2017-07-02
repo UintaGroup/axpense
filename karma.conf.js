@@ -25,7 +25,9 @@ module.exports = function (config) {
 			'text/x-typescript': ['ts','tsx']
 		},
 		coverageIstanbulReporter: {
-			reports: [ 'html', 'lcovonly' ],
+			reports: {
+				'html': 'coverage',
+				'lcovonly': './coverage/coverage.lcov' },
 			fixWebpackSourcePaths: true,
 		},
 		angularCli: {
