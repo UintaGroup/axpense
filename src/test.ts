@@ -10,8 +10,14 @@ import 'zone.js/dist/fake-async-test';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { getTestBed, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
-import { App, Config, Form, IonicModule, Keyboard, DomController, MenuController, NavController, Platform } from 'ionic-angular';
-import { ConfigMock, PlatformMock } from './mocks';
+import {
+	App, Config, Form, IonicModule, Keyboard, DomController, MenuController, NavController, Platform,
+	GestureController
+} from 'ionic-angular';
+import { ConfigMock, FormMock, PlatformMock, TranslatePipeMock, TranslateServiceMock } from './mocks';
+import { CommonModule } from './common/common.module';
+import { NavControllerMock } from 'ionic-mocks';
+import { TranslateService } from '@ngx-translate/core';
 
 // Unfortunately there's no typing for the `__karma__` variable. Just declare it as any.
 declare var __karma__: any;
@@ -36,8 +42,8 @@ __karma__.start();
 
 export class TestUtils {
 
-	public static beforeEachCompiler(components: Array<any>): Promise<{fixture: any, instance: any}> {
-		return TestUtils.configureIonicTestingModule(components)
+	public static beforeEachCompiler(components: any[], providers: any[]): Promise<{ fixture: any, instance: any }> {
+		return TestUtils.configureIonicTestingModule(components, providers)
 			.compileComponents().then(() => {
 				let fixture: any = TestBed.createComponent(components[0]);
 				return {
@@ -47,22 +53,21 @@ export class TestUtils {
 			});
 	}
 
-	public static configureIonicTestingModule(components: Array<any>): typeof TestBed {
+	public static configureIonicTestingModule(components: Array<any>, componentProviders: any[]): typeof TestBed {
+		let coreProviders: any[] = [
+			App, Form, Keyboard, DomController, GestureController, MenuController,
+			{provide: Config, useClass: ConfigMock},
+			{provide: TranslateService, useFactory: (TranslateServiceMock.instance)},
+			{provide: Platform, useClass: PlatformMock},
+		];
+
+		let providers: any[] = coreProviders.concat(componentProviders);
+
 		return TestBed.configureTestingModule({
-			declarations: [
-				...components,
-			],
-			providers: [
-				App, Form, Keyboard, DomController, MenuController, NavController,
-				{provide: Platform, useClass: PlatformMock},
-				{provide: Config, useClass: ConfigMock}
-			],
-			imports: [
-				FormsModule,
-				IonicModule,
-				ReactiveFormsModule,
-			],
-		});
+				imports: [IonicModule, CommonModule],
+				declarations: [components, TranslatePipeMock],
+				providers: providers
+			});
 	}
 
 	// http://stackoverflow.com/questions/2705583/how-to-simulate-a-click-with-javascript

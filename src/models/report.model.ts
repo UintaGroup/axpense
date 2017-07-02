@@ -75,4 +75,8 @@ export class Report {
 	public set expenses(value: Expense[]) {
 		this._expenses = value;
 	}
+
+	public submitted(): void {
+		this._status = 1;
+	}
 }

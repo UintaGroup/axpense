@@ -90,6 +90,12 @@ export class PlatformMock {
 }
 
 export class TranslateServiceMock {
+	public static instance(): any {
+		let instance = jasmine.createSpyObj('TranslateServiceMock', ['get']);
+		instance.get.and.returnValue(Observable.of(''))
+
+		return instance;
+	}
 	public get(key: string): Observable<any> {
 		return Observable.of({});
 	}
@@ -107,55 +113,6 @@ export class TranslatePipeMock implements PipeTransform {
 		return '';
 	}
 }
-
-export class ReportServiceMock {
-
-	public static instance(): any {
-		let instance = jasmine.createSpyObj('ReportServiceMock', ['all']);
-		instance.all$.and.returnValue(Observable.from([]));
-		instance.all.and.returnValue(Promise.resolve([]));
-		instance.save.and.returnValue(Promise.resolve([]));
-		instance.delete.and.returnValue(Promise.resolve([]));
-
-		return instance;
-	}
-}
-
-export class LocalDbMock {
-	public static instance(): any {
-		let instance = jasmine.createSpyObj('LocalDb', [
-											'queryWithBuilder',
-											'query',
-											'queryWithArrayResult',
-											'get',
-											'set',
-											'allKeys',
-											'removeKvp',
-											'removeAllKvp',
-											'resetDb',
-											'initialize',
-											'dropAndCreate',
-											'seedTable',
-											'insert']);
-
-		instance.queryWithBuilder.and.returnValue(Promise.resolve());
-		instance.query.and.returnValue(Promise.resolve());
-		instance.queryWithArrayResult.and.returnValue(Promise.resolve([]));
-		instance.get.and.returnValue(Promise.resolve());
-		instance.set.and.returnValue(Promise.resolve());
-		instance.allKeys.and.returnValue(Promise.resolve());
-		instance.removeKvp.and.returnValue(Promise.resolve());
-		instance.resetDb.and.returnValue(Promise.resolve());
-		instance.initialize.and.returnValue(Promise.resolve());
-		instance.dropAndCreate.and.returnValue(Promise.resolve());
-		instance.seedTable.and.returnValue(Promise.resolve());
-		instance.insert.and.returnValue(Promise.resolve());
-
-		return instance;
-	}
-}
-
-
 
 export class FirebaseServiceMock {
 	public static instance(): any {

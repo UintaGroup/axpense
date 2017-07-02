@@ -37,4 +37,15 @@ export class ReportService {
 		]);
 	}
 
+	public submit(report: Report): Promise<any> {
+		return new Promise(resolve => {
+
+			setTimeout(() => {
+				report.submitted();
+				resolve(this.save(report));
+			}, 2000);
+
+		});
+	}
+
 }

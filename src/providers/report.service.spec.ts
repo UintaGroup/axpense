@@ -1,8 +1,8 @@
-import { ReportService } from './report.service';
-import { LocalDb } from './local-db.service';
-import { ExpenseService } from './expense.service';
-import { LocalDbMock } from '../mocks';
-import { Report } from '../models/report.model';
+import { Report }           from '../models';
+import { ReportService }    from './report.service';
+import { LocalDb }          from './local-db.service';
+import { LocalDbMock }      from '../mocks/local-db.service.mock';
+import { ExpenseService }   from './expense.service';
 
 describe('ReportService', () => {
 
@@ -13,7 +13,7 @@ describe('ReportService', () => {
 
 	beforeEach(() => {
 		db = LocalDbMock.instance();
-		expenseSrvc = jasmine.createSpyObj('ExpenseSrevice', ['deleteAll']);
+		expenseSrvc = jasmine.createSpyObj('ExpenseService', ['deleteAll']);
 
 		classUnderTest = new ReportService(db, expenseSrvc);
 	});
@@ -47,26 +47,53 @@ describe('ReportService', () => {
 
 	});
 
-	// describe('save', () => {
-	// 	let report: Report;
-	// 	let insertResponse: any;
-	//
-	// 	beforeEach(() => {
-	// 		report = Report.create({});
-	// 		insertResponse = {res: {id: 1}};
-	//
-	// 		db = jasmine.createSpyObj('LocalDb', ['insert'])
-	// 		db.insert.and.returnValue(insertResponse);
-	// 	});
-	//
-	// 	it('should insert report', done => {
-	// 		classUnderTest.save(report)
-	// 			.then(() => {
-	// 				expect(db.insert).toHaveBeenCalledWith(Report.tableName, t statusreport);
-	// 				done();
-	// 			});
-	// 	});
-	//
-	// });
+	describe('save', () => {
 
+		let report: Report = new Report();
+
+		it('should call insert on db', done => {
+
+			classUnderTest.save(report)
+				.then(() => {
+					expect(db.insert).toHaveBeenCalledWith(Report.tableName, report);
+					done();
+				})
+		});
+	});
+
+	describe('delete', () => {
+		let report: Report = Report.create({id: 1});
+
+		it('should query dbService', done => {
+			classUnderTest.delete(report)
+				.then(() => {
+					expect(db.query).toHaveBeenCalledWith( `DELETE FROM ${Report.tableName} WHERE id = ?`, [1]);
+					done();
+				});
+		});
+
+		it('should call deleteAll on expenseService', done => {
+			classUnderTest.delete(report)
+				.then(() => {
+					expect(expenseSrvc.deleteAll).toHaveBeenCalledWith(report);
+					done();
+				})
+		});
+	});
+
+	describe('submit', () => {
+		let report: Report;
+
+		beforeEach(() => {
+			report = Report.create({id: 1});
+		});
+
+		it('it should set report to submitted', () => {
+
+			classUnderTest.submit(report)
+				.then(() => {
+					expect(report.status).toEqual(1);
+				});
+		});
+	});
 });

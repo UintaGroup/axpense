@@ -2,70 +2,97 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement }    from '@angular/core';
 
 import { ReportListPage } from './report-list';
-import { App, Config, Events, IonicModule, ModalController, NavController, Platform } from 'ionic-angular';
-import { TranslateModule } from '@ngx-translate/core';
+import {
+	App, Config, DomController, Events, Form, GestureController, IonicModule, Keyboard, MenuController, Modal,
+	ModalController,
+	NavController,
+	Platform
+} from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '../../common/common.module';
-import { AppMock, EventsMock, ModalControllerMock, ModalMock, NavControllerMock } from 'ionic-mocks';
+import {
+	AppMock, EventsMock, MenuControllerMock, ModalControllerMock, ModalMock,
+	NavControllerMock
+} from 'ionic-mocks';
 import { ReportService } from '../../providers/report.service';
 import { ReportServiceMock } from '../../mocks/report.service.mock';
-import { ConfigMock, PlatformMock } from '../../mocks';
+import { ConfigMock, PlatformMock, TranslateServiceMock } from '../../mocks';
+import { By } from '@angular/platform-browser';
+import { TestUtils } from '../../test';
+import { providers } from '../../app/app.module';
 
 describe('ReportListPage', () => {
 
-	let classUnderTest:    ReportListPage;
+	let modal: Modal;
+	let modalCtrl: ModalController;
+	let reportService: ReportService;
+	let navCrtl: NavController;
+
+	let classUnderTest: ReportListPage;
+
 	let fixture: ComponentFixture<ReportListPage>;
-	let de:      DebugElement;
-	let el:      HTMLElement;
+	let instance: ReportService;
 
-	beforeEach(async(() => {
-		let mock: ReportServiceMock = ReportServiceMock.instance();
-		TestBed.configureTestingModule({
-				imports: [IonicModule, TranslateModule, CommonModule],
-				declarations: [ ReportListPage ],
-				providers: [
-					{provide: NavController, useFactory: (NavControllerMock.instance)},
-					{provide: ReportService, useFactory: (ReportServiceMock.instance)},
-					{provide: NavController, useFactory: (NavControllerMock.instance)},
-					{provide: ModalMock, useFactory: (ModalMock.instance)},
-					{
-						provide: ModalController,
-						useFactory: (ModalControllerMock.instance),
-						deps: [ModalMock]
-					},
-					{provide: Events, useFactory: (EventsMock.instance)},
-					{provide: App, useFactory: (AppMock.instance)},
-					{provide: Platform, useClass: PlatformMock},
-					{provide: Config, useClass: ConfigMock}
-				]
-			})
-			.compileComponents();
-	}));
+		beforeEach(async(() => {
 
-	beforeEach(() => {
-		fixture = TestBed.createComponent(ReportListPage);
-		console.log('FIXTURE', fixture);
+			modal = ModalMock.instance();
+			modalCtrl = ModalControllerMock.instance(modal);
+			reportService = ReportServiceMock.instance();
+			navCrtl = NavControllerMock.instance();
 
-		// classUnderTest = fixture.componentInstance; // ReportListPage test instance
+			let providers: any[] = [
+				{ provide: ReportService, useFactory: () => { return reportService;}},
+				{ provide: ModalController, useFactory: () => { return modalCtrl;}},
+				{ provide: NavController, useFactory: () => { return navCrtl}},
+			];
 
-		// de = fixture.debugElement.query(By.css('h1'));
-		// el = de.nativeElement;
+			return TestUtils.beforeEachCompiler([ReportListPage], providers)
+				.then(compiled => {
+
+					fixture = compiled.fixture;
+					instance = compiled.instance;
+					classUnderTest = fixture.componentInstance;
+
+					fixture.detectChanges();
+				});}
+		));
+
+		describe('init', () => {
+
+			it('should set reports', () => {
+				classUnderTest.init();
+
+				expect(classUnderTest.reports).toEqual(reportService.all$());
+			});
+		});
+
+		describe('add', () => {
+
+			it('should create modal', () => {
+				classUnderTest.add();
+
+				expect(modalCtrl.create).toHaveBeenCalled();
+			});
+
+			it('presents modal', () => {
+				classUnderTest.add();
+
+				expect(modal.present).toHaveBeenCalled();
+			});
+		});
+
+		describe('submit', () => {
+
+			it('should call save on reportService', done => {
+				let report: any = {};
+
+				classUnderTest.submit(report)
+					.then(() => {
+						// expect(reportService.).toHaveBeenCalledWith(report);
+						done();
+					});
+
+			});
+		});
+
 	});
-
-	// it('no title in the DOM until manually call `detectChanges`', () => {
-	// 	expect(el.textContent).toEqual('');
-	// });
-
-	// it('should display original title', () => {
-	// 	fixture.detectChanges();
-	// 	// expect(el.textContent).toContain(classUnderTest..);
-	// 	expect(true).toBeTruthy();
-	// });
-
-	it('should display a different test title', () => {
-		// classUnderTest.title = 'Test Title';
-		// fixture.detectChanges();
-		// expect(el.textContent).toContain('Test Title');
-		expect(true).toBeTruthy();
-	});
-
-});
