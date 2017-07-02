@@ -2,6 +2,7 @@ import { NgModule, ErrorHandler, Provider }         from '@angular/core';
 import { BrowserModule }                            from '@angular/platform-browser';
 import { Http, HttpModule }                         from '@angular/http';
 import { Storage, IonicStorageModule }              from '@ionic/storage';
+import { CloudSettings, CloudModule }               from '@ionic/cloud-angular';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { TranslateModule, TranslateLoader }         from '@ngx-translate/core';
 import { TranslateHttpLoader }                      from '@ngx-translate/http-loader';
@@ -30,6 +31,12 @@ export function provideSettingsFactory(storage: Storage): SettingsService {
 	});
 }
 
+const cloudSettings: CloudSettings = {
+	'core': {
+		'app_id': 'e2ed6492'
+	}
+};
+
 export function providers(): Provider[] {
 	return [
 		{provide: APP_CONFIG, useValue: CONFIG},
@@ -57,6 +64,7 @@ export function providers(): Provider[] {
 	imports: [
 		BrowserModule,
 		CommonModule,
+		CloudModule.forRoot(cloudSettings),
 		HttpModule,
 		IonicModule.forRoot(App),
 		IonicStorageModule.forRoot({

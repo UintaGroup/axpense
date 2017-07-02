@@ -35,6 +35,7 @@
     "@ionic-native/sqlite": "3.12.1",
     "@ionic-native/status-bar": "3.12.1",
     "@ionic-native/toast": "3.6.0",
+    "@ionic/cloud-angular": "^0.12.0",
     "@ionic/storage": "2.0.1",
     "@ngx-translate/core": "^7.0.0",
     "@ngx-translate/http-loader": "^0.1.0",
