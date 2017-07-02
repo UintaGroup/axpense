@@ -9,7 +9,7 @@
             </button>
         </ion-buttons>
         <ion-buttons end>
-            <button ion-button (click)="done()" color="secondary" [disabled]="!formValid" strong>
+            <button ion-button (click)="submit()" color="secondary" [disabled]="!formValid" strong>
                 <span color="primary" showWhen="ios">{{ 'BUTTON.DONE' | translate }}</span>
                 <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
             </button>
@@ -20,7 +20,7 @@
 
 
 <ion-content>
-    <form *ngIf="form" [formGroup]="form" (ngSubmit)="done()">
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="submit()">
         <ion-list>
             <ion-item>
                 <ion-input type="text" placeholder="{{ 'PLACEHOLDER.EXPENSE_MERCHANT' | translate}}"

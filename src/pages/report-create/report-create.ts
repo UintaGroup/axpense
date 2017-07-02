@@ -29,7 +29,7 @@ export class ReportCreatePage {
 		this.viewCtrl.dismiss();
 	}
 
-	done(): any {
+	submit(): any {
 		if (!this.form.valid) {
 			return;
 		}

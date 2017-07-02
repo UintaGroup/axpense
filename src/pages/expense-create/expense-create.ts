@@ -56,7 +56,7 @@ export class ExpenseCreatePage extends BasePage {
 		return this.viewCtrl.dismiss();
 	}
 
-	done(): Promise<any>{
+	submit(): Promise<any>{
 		if (!this.form.valid) {
 			return Promise.resolve();
 		} else {
