@@ -92,19 +92,13 @@ export class PlatformMock {
 export class TranslateServiceMock {
 	public static instance(): any {
 		let instance = jasmine.createSpyObj('TranslateServiceMock', ['get']);
-		instance.get.and.returnValue(Observable.of(''))
+		instance.get.and.returnValue(Observable.of(''));
 
 		return instance;
 	}
-	public get(key: string): Observable<any> {
-		return Observable.of({});
-	}
-}
-
-export class NavControllerMock {
-	public pop(component: any): Promise<any> {
-		return Promise.resolve();
-	}
+	// public get(key: string): Observable<any> {
+	// 	return Observable.of({});
+	// }
 }
 
 @Pipe({name: 'translate'})

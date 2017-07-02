@@ -1,6 +1,6 @@
 export class LocalDbMock {
 	public static instance(): any {
-		let instance = jasmine.createSpyObj('LocalDb', [
+		let instance: any = jasmine.createSpyObj('LocalDb', [
 			'queryWithBuilder',
 			'query',
 			'queryWithArrayResult',

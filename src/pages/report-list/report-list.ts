@@ -44,7 +44,8 @@ export class ReportListPage {
 				report.processing = false;
 				itemSlide.close();
 			})
-			.catch(() => {
+			.catch(err => {
+				report.statusMessage = err;
 				report.processing = false;
 			});
 	}

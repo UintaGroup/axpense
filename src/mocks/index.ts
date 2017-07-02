@@ -1,2 +1,9 @@
-export * from './report.service.mock';
-export * from './local-db.service.mock'
+import { ReportServiceMock }    from './report.service.mock';
+import { ItemSlidingMock }      from './item-sliding.mock';
+import { LocalDbMock }          from './local-db.service.mock';
+
+export {
+	ReportServiceMock,
+	ItemSlidingMock,
+	LocalDbMock
+}

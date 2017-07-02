@@ -83,4 +83,13 @@ export class Report {
 	public set processing(value: boolean) {
 		this._processing = value;
 	}
+
+	private _statusMessage: string;
+	public get statusMessage(): string {
+		return this._statusMessage;
+	}
+
+	public set statusMessage(value: string) {
+		this._statusMessage = value;
+	}
 }
