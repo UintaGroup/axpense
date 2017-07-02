@@ -1,25 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement }    from '@angular/core';
+import { async, ComponentFixture } from '@angular/core/testing';
+import { DebugElement }             from '@angular/core';
 
-import { ReportListPage } from './report-list';
-import {
-	App, Config, DomController, Events, Form, GestureController, IonicModule, Keyboard, MenuController, Modal,
-	ModalController,
-	NavController,
-	Platform
-} from 'ionic-angular';
-import { TranslateService } from '@ngx-translate/core';
-import { CommonModule } from '../../common/common.module';
-import {
-	AppMock, EventsMock, MenuControllerMock, ModalControllerMock, ModalMock,
-	NavControllerMock
-} from 'ionic-mocks';
-import { ReportService } from '../../providers/report.service';
-import { ReportServiceMock } from '../../mocks/report.service.mock';
-import { ConfigMock, PlatformMock, TranslateServiceMock } from '../../mocks';
-import { By } from '@angular/platform-browser';
 import { TestUtils } from '../../test';
-import { providers } from '../../app/app.module';
+import { ReportListPage } from './report-list';
+import { Modal, ModalController, NavController, } from 'ionic-angular';
+import { ModalMock, ModalControllerMock, NavControllerMock } from 'ionic-mocks';
+import { ReportService } from '../../providers';
+import { ReportServiceMock } from '../../mocks/report.service.mock';
 
 describe('ReportListPage', () => {
 
@@ -41,9 +28,9 @@ describe('ReportListPage', () => {
 			navCrtl = NavControllerMock.instance();
 
 			let providers: any[] = [
-				{ provide: ReportService, useFactory: () => { return reportService;}},
-				{ provide: ModalController, useFactory: () => { return modalCtrl;}},
-				{ provide: NavController, useFactory: () => { return navCrtl}},
+				{ provide: ReportService, useFactory: () => reportService},
+				{ provide: ModalController, useFactory: () => modalCtrl},
+				{ provide: NavController, useFactory: () => navCrtl}
 			];
 
 			return TestUtils.beforeEachCompiler([ReportListPage], providers)

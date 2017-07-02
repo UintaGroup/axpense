@@ -37,13 +37,14 @@ export class ReportListPage {
 		return addModal.present();
 	}
 
-	public submit(report: Report): Promise<Report> {
-		return Promise.resolve(report);
+	public submit(report: Report): Promise<any> {
+		return this._reportSrvc.submit(report)
+			.then(() => this.init())
 	}
 
 	public delete(report: Report): Promise<void> {
 		return this._reportSrvc.delete(report)
-							.then(() => this.init());
+					.then(() => this.init());
 	}
 
 	public open(report: Report): Promise<void> {
