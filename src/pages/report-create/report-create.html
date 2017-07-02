@@ -24,7 +24,7 @@
 
 
 <ion-content>
-  <form *ngIf="form" [formGroup]="form" (ngSubmit)="createItem()">
+  <form *ngIf="form" [formGroup]="form" (ngSubmit)="done()">
     <ion-list>
       <ion-item>
         <ion-input type="text" placeholder="{{ 'PLACEHOLDER.REPORT_NAME' | translate }}" formControlName="name"></ion-input>
