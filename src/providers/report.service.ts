@@ -11,13 +11,8 @@ export class ReportService {
 	constructor(private _db: LocalDb, private _expenseSrvc: ExpenseService) {
 	}
 
-	public all(): Promise<Report[]> {
-		return this._db.queryWithArrayResult('SELECT * FROM reports')
-			.then(rows => rows.map(row => Report.create(row)));
-	}
-
 	public all$(): Observable<Report[]> {
-		return Observable.fromPromise(this._db.queryWithArrayResult('SELECT * FROM reports')
+		return Observable.fromPromise(this._db.queryWithArrayResult('SELECT * FROM reports ORDER BY id DESC')
 			.then(rows => rows.map(row => Report.create(row))));
 	}
 

@@ -23,24 +23,12 @@ describe('ReportService', () => {
 		expect(classUnderTest).toBeDefined();
 	});
 
-	describe('all', () => {
-
-		it('should query for all reports', done => {
-			classUnderTest.all()
-				.then(() => {
-					expect(db.queryWithArrayResult).toHaveBeenCalledWith('SELECT * FROM reports');
-					done();
-				});
-		});
-
-	});
-
 	describe('all$', () => {
 
 		it('should query for all reports', done => {
 			classUnderTest.all$()
 				.subscribe(() => {
-					expect(db.queryWithArrayResult).toHaveBeenCalledWith('SELECT * FROM reports');
+					expect(db.queryWithArrayResult).toHaveBeenCalledWith('SELECT * FROM reports ORDER BY id DESC');
 					done();
 				});
 		});
