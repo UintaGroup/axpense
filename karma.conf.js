@@ -24,16 +24,19 @@ module.exports = function (config) {
 		mime: {
 			'text/x-typescript': ['ts','tsx']
 		},
-		coverageIstanbulReporter: {
-			reports: [ 'html', 'lcovonly' ],
-			fixWebpackSourcePaths: true
+		remapIstanbulReporter: {
+			reports: {
+				html: 'coverage',
+				lcovonly: './coverage/coverage.lcov'
+			}
 		},
 		angularCli: {
+			config: './angular-cli.json',
 			environment: 'dev'
 		},
 		reporters: config.angularCli && config.angularCli.codeCoverage
-			? ['progress', 'coverage-istanbul']
-			: ['progress', 'kjhtml'],
+			? ['mocha', 'karma-remap-istanbul']
+			: ['mocha'],
 		port: 9876,
 		colors: true,
 		logLevel: config.LOG_INFO,
