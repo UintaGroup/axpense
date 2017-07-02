@@ -4,12 +4,8 @@ export class Report {
 
 	public static tableName: string = 'reports';
 
-	constructor() {
-
-	}
-
 	public static create(obj: any): Report {
-		let o = new Report();
+		let o: Report = new Report();
 		for (let propName in obj) {
 			o['_' + propName] = obj[propName];
 		}
@@ -57,7 +53,6 @@ export class Report {
 		return this._status;
 	}
 
-
 	private _name: string;
 	public get name(): string {
 		return this._name;
@@ -78,5 +73,14 @@ export class Report {
 
 	public submitted(): void {
 		this._status = 1;
+	}
+
+	private _processing: boolean;
+	public get processing(): boolean {
+		return this._processing;
+	}
+
+	public set processing(value: boolean) {
+		this._processing = value;
 	}
 }

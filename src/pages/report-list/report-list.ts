@@ -1,5 +1,5 @@
 import { Component }                        from '@angular/core';
-import { NavController, ModalController, Modal }   from 'ionic-angular';
+import { NavController, ModalController, Modal, ItemSliding }   from 'ionic-angular';
 import { Observable }                       from 'rxjs/Observable';
 
 import { Report }                           from '../../models';
@@ -15,8 +15,8 @@ export class ReportListPage {
 	public reports: Observable<Report[]>;
 
 	constructor(public navCtrl: NavController,
-				private _reportSrvc: ReportService,
-				private modalCtrl: ModalController) {
+		private _reportSrvc: ReportService,
+		private modalCtrl: ModalController) {
 		this.init();
 	}
 
@@ -29,7 +29,7 @@ export class ReportListPage {
 		addModal.onDidDismiss(report => {
 			if (report) {
 				return this._reportSrvc.save(report)
-										.then(() => this.init());
+					.then(() => this.init());
 			} else {
 				return Promise.resolve();
 			}
@@ -37,14 +37,21 @@ export class ReportListPage {
 		return addModal.present();
 	}
 
-	public submit(report: Report): Promise<any> {
+	public submit(report: Report, itemSlide: ItemSliding): Promise<any> {
+		report.processing = true;
 		return this._reportSrvc.submit(report)
-			.then(() => this.init())
+			.then(() => {
+				report.processing = false;
+				itemSlide.close();
+			})
+			.catch(() => {
+				report.processing = false;
+			});
 	}
 
 	public delete(report: Report): Promise<void> {
 		return this._reportSrvc.delete(report)
-					.then(() => this.init());
+			.then(() => this.init());
 	}
 
 	public open(report: Report): Promise<void> {

@@ -20,7 +20,7 @@ describe('ReportListPage', () => {
 	let fixture: ComponentFixture<ReportListPage>;
 	let instance: ReportService;
 
-		beforeEach(async(() => {
+	beforeEach(async(() => {
 
 			modal = ModalMock.instance();
 			modalCtrl = ModalControllerMock.instance(modal);
@@ -28,9 +28,9 @@ describe('ReportListPage', () => {
 			navCrtl = NavControllerMock.instance();
 
 			let providers: any[] = [
-				{ provide: ReportService, useFactory: () => reportService},
-				{ provide: ModalController, useFactory: () => modalCtrl},
-				{ provide: NavController, useFactory: () => navCrtl}
+				{provide: ReportService, useFactory: () => reportService},
+				{provide: ModalController, useFactory: () => modalCtrl},
+				{provide: NavController, useFactory: () => navCrtl}
 			];
 
 			return TestUtils.beforeEachCompiler([ReportListPage], providers)
@@ -41,45 +41,46 @@ describe('ReportListPage', () => {
 					classUnderTest = fixture.componentInstance;
 
 					fixture.detectChanges();
-				});}
-		));
+				});
+		}
+	));
 
-		describe('init', () => {
+	describe('init', () => {
 
-			it('should set reports', () => {
-				classUnderTest.init();
+		it('should set reports', () => {
+			classUnderTest.init();
 
-				expect(classUnderTest.reports).toEqual(reportService.all$());
-			});
+			expect(classUnderTest.reports).toEqual(reportService.all$());
 		});
-
-		describe('add', () => {
-
-			it('should create modal', () => {
-				classUnderTest.add();
-
-				expect(modalCtrl.create).toHaveBeenCalled();
-			});
-
-			it('presents modal', () => {
-				classUnderTest.add();
-
-				expect(modal.present).toHaveBeenCalled();
-			});
-		});
-
-		describe('submit', () => {
-
-			it('should call save on reportService', done => {
-				let report: any = {};
-
-				classUnderTest.submit(report)
-					.then(() => {
-						// expect(reportService.).toHaveBeenCalledWith(report);
-						done();
-					});
-
-			});
-		});
-
 	});
+
+	describe('add', () => {
+
+		it('should create modal', () => {
+			classUnderTest.add();
+
+			expect(modalCtrl.create).toHaveBeenCalled();
+		});
+
+		it('presents modal', () => {
+			classUnderTest.add();
+
+			expect(modal.present).toHaveBeenCalled();
+		});
+	});
+
+	describe('submit', () => {
+
+		it('should call save on reportService', done => {
+			let report: any = {};
+
+			classUnderTest.submit(report)
+				.then(() => {
+					// expect(reportService.).toHaveBeenCalledWith(report);
+					done();
+				});
+
+		});
+	});
+
+});

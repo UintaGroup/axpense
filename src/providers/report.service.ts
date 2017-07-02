@@ -43,7 +43,7 @@ export class ReportService {
 			setTimeout(() => {
 				report.submitted();
 				resolve(this.save(report));
-			}, 2000);
+			}, 4000);
 
 		});
 	}

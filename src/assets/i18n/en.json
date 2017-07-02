@@ -43,6 +43,7 @@
     }
   },
   "LABEL": {
+    "SENDING": "Sending",
     "NAME": "Name",
     "EMAIL": "Email",
     "USERNAME": "Username",

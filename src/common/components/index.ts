@@ -1,9 +1,12 @@
-import { EmptyListPrompt } from './empty-list-prompt/empty-list-prompt';
+import { EmptyListPrompt } from './empty-list-prompt.component';
+import { ReportStatusBadge } from './report-status-badge.component';
 
 export {
-	EmptyListPrompt
+	EmptyListPrompt,
+	ReportStatusBadge
 }
 
 export const COMMON_DIRECTIVES: any[] = [
-	EmptyListPrompt
+	EmptyListPrompt,
+	ReportStatusBadge
 ];
