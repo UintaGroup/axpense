@@ -9,7 +9,7 @@
             </button>
         </ion-buttons>
         <ion-buttons end>
-            <button ion-button (click)="done()" [disabled]="!formValid" strong>
+            <button ion-button (click)="done()" color="secondary" [disabled]="!formValid" strong>
                 <span color="primary" showWhen="ios">{{ 'BUTTON.DONE' | translate }}</span>
                 <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
             </button>

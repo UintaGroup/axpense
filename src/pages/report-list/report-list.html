@@ -18,7 +18,7 @@
 
     <ion-list>
         <ion-item *ngIf="((reports | async)?.length < 1) || !reports">
-            <h2>{{'CONTENT.REPORTS_LIST.EMPTY' | translate}}</h2>
+            <empty-list-prompt text="{{'CONTENT.REPORTS_LIST.EMPTY' | translate}}"></empty-list-prompt>
         </ion-item>
         <ion-item-sliding *ngFor="let r of reports | async">
             <button ion-item (click)="open(r)">
@@ -28,10 +28,17 @@
             </button>
 
             <ion-item-options>
+
+                <button ion-button color="primary" (click)="submit(r)">
+                    <ion-icon name="send"></ion-icon>
+                    {{ 'BUTTON.SUBMIT' | translate }}
+                </button>
+
                 <button ion-button color="danger" (click)="delete(r)">
                     <ion-icon name="trash"></ion-icon>
                     {{ 'BUTTON.DELETE' | translate }}
                 </button>
+
             </ion-item-options>
         </ion-item-sliding>
     </ion-list>

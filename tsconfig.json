@@ -20,6 +20,7 @@
     "node_modules",
     "src/test.ts",
     "**/*.spec.ts",
+    "**/*.mock.ts",
     "e2e"
   ],
   "compileOnSave": false,

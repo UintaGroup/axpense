@@ -6,40 +6,39 @@ import { TranslateService }                     from '@ngx-translate/core';
 
 import { AuthService, LocalDb }                 from '../providers';
 import { AppEvents }                            from '../models';
-import { FirstRunPage, LoginPage, MainPage }    from '../pages';
-import { SettingsPage, ReportListPage }         from '../pages';
-import { SignupPage } from '../pages/signup/signup';
+import { FIRST_RUN_PAGE, MAIN_PAGE }            from '../pages';
+import { SettingsPage, ReportListPage, SignupPage, LoginPage  } from '../pages';
 
 @Component({
-	template: `
-        <ion-menu [content]="content">
-            <ion-header>
-                <ion-toolbar>
-                    <ion-title>Pages</ion-title>
-                </ion-toolbar>
-            </ion-header>
+	template: `<ion-menu [content]="content">
+				<ion-header>
+					<ion-toolbar>
+						<ion-title>Pages</ion-title>
+					</ion-toolbar>
+				</ion-header>
 
-            <ion-content>
-                <ion-list>
-                    <ion-item menuClose *ngFor="let p of pages" (click)="openPage(p)">
-                        <ion-icon name="{{p.icon}}"></ion-icon>
-                        {{p.title | translate}}
-                    </ion-item>
-                </ion-list>
-            </ion-content>
-            <ion-footer>
-                <ion-list>
-                    <ion-item menuClose (click)="logout()">
-                        <ion-icon name="log-out"></ion-icon>
-                        {{'BUTTON.LOGOUT' | translate }}
-                    </ion-item>
-                </ion-list>
-            </ion-footer>
-        </ion-menu>
-        <ion-nav #content [root]="rootPage"></ion-nav>`
+				<ion-content>
+					<ion-list>
+						<ion-item menuClose *ngFor="let p of pages" (click)="openPage(p)">
+							<ion-icon name="{{p.icon}}"></ion-icon>
+								{{p.title | translate}}
+						</ion-item>
+					</ion-list>
+				</ion-content>
+				
+				<ion-footer>
+					<ion-list>
+						<ion-item menuClose (click)="logout()">
+							<ion-icon name="log-out"></ion-icon>
+							{{'BUTTON.LOGOUT' | translate }}
+						</ion-item>
+					</ion-list>
+				</ion-footer>
+			</ion-menu>
+<ion-nav #content [root]="rootPage"></ion-nav>`
 })
 export class App {
-	public rootPage: Component = FirstRunPage;
+	public rootPage: Component = FIRST_RUN_PAGE;
 
 	@ViewChild(Nav)
 	public nav: Nav;
@@ -98,7 +97,7 @@ export class App {
 	private eventRegistration(events: Events): void {
 
 		events.subscribe(AppEvents.LOGOUT, () => this.openPage({component: LoginPage}));
-		events.subscribe(AppEvents.UNAUTHENTICATED, () => this.openPage({component: LoginPage}));
-		events.subscribe(AppEvents.AUTHENTICATED, () => this.openPage({component: MainPage}));
+		events.subscribe(AppEvents.UNAUTHENTICATED, () => this.openPage({component: FIRST_RUN_PAGE}));
+		events.subscribe(AppEvents.AUTHENTICATED, () => this.openPage({component: MAIN_PAGE}));
 	}
 }

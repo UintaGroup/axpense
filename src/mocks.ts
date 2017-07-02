@@ -1,7 +1,8 @@
 /* tslint:disable */
-import { Observable } from 'rxjs';
+import { ObjectUnsubscribedError, Observable } from 'rxjs';
 import { Pipe, PipeTransform } from '@angular/core';
-// import {jasmine} from 'jasmine';
+import {} from 'jasmine';
+import { Report } from './models/report.model';
 
 export class ConfigMock {
 
@@ -94,6 +95,12 @@ export class TranslateServiceMock {
 	}
 }
 
+export class NavControllerMock {
+	public pop(component: any): Promise<any> {
+		return Promise.resolve();
+	}
+}
+
 @Pipe({name: 'translate'})
 export class TranslatePipeMock implements PipeTransform {
 	public transform(): string {
@@ -101,10 +108,14 @@ export class TranslatePipeMock implements PipeTransform {
 	}
 }
 
-export class RecipeCategoryServiceMock {
+export class ReportServiceMock {
+
 	public static instance(): any {
-		let instance = jasmine.createSpyObj('RecipeCategoryService', ['all']);
-		instance.all.and.returnValue(Observable.of([]));
+		let instance = jasmine.createSpyObj('ReportServiceMock', ['all']);
+		instance.all$.and.returnValue(Observable.from([]));
+		instance.all.and.returnValue(Promise.resolve([]));
+		instance.save.and.returnValue(Promise.resolve([]));
+		instance.delete.and.returnValue(Promise.resolve([]));
 
 		return instance;
 	}
@@ -143,6 +154,8 @@ export class LocalDbMock {
 		return instance;
 	}
 }
+
+
 
 export class FirebaseServiceMock {
 	public static instance(): any {

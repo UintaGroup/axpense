@@ -11,8 +11,8 @@ import { ExpenseCreatePage }    from './expense-create/expense-create';
 import { ReportDetailTabsPage } from './report-detail-tabs/report-detail-tabs';
 import { ExpenseDetailPage }    from './expense-detail/expense-detail';
 
-export const MAIN_PAGE: Component = ReportListPage;
-export const FIRST_RUN_PAGE: Component = TutorialPage;
+export const MAIN_PAGE: any = ReportListPage;
+export const FIRST_RUN_PAGE: any = TutorialPage;
 
 export {
 	LoginPage,

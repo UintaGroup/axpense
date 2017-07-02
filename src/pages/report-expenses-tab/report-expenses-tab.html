@@ -12,8 +12,11 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
     <ion-list>
+        <ion-item *ngIf="!expenses ||expenses?.length < 1">
+            <empty-list-prompt text="{{'CONTENT.EXPENSE_LIST.EMPTY' | translate}}"></empty-list-prompt>
+        </ion-item>
         <ion-item-sliding *ngFor="let e of expenses">
             <button ion-item (click)="open(e)">
                 <ion-row>

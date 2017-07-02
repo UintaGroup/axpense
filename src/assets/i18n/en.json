@@ -4,11 +4,13 @@
     "CANCEL": "Cancel",
     "DONE": "Done",
     "EDIT": "Edit",
+    "SUBMIT": "Submit",
     "SIGNUP": "Sign Up",
     "SIGNIN": "Sign In",
     "DELETE": "Delete",
     "SKIP": "Skip",
-    "LOGOUT": "LOGOUT",
+    "LOGIN": "Login",
+    "LOGOUT": "Logout",
     "CONTINUE" : "Continue",
     "SETTINGS": {
       "PROFILE" : "Edit Profile"
@@ -44,6 +46,7 @@
     "NAME": "Name",
     "EMAIL": "Email",
     "USERNAME": "Username",
+    "PASSWORD": "Password",
     "WELCOME_INTRO" : "The starting point for your next great Ionic app",
     "SETTINGS": {
       "REPORT": "Reports",
@@ -55,7 +58,10 @@
   },
   "CONTENT": {
     "REPORTS_LIST": {
-      "EMPTY": "No Reports"
+      "EMPTY": "Add a Report"
+    },
+    "EXPENSE_LIST": {
+      "EMPTY": "Add an Expense"
     },
     "TUTORIAL": {
       "SLIDE1_TITLE": "Welcome to the Ionic Super Starter",

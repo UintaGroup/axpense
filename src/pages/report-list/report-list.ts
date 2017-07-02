@@ -25,7 +25,7 @@ export class ReportListPage {
 	}
 
 	public add(): Promise<void> {
-		let addModal:Modal = this.modalCtrl.create(ReportCreatePage);
+		let addModal: Modal = this.modalCtrl.create(ReportCreatePage);
 		addModal.onDidDismiss(report => {
 			if (report) {
 				return this._reportSrvc.save(report)
@@ -35,6 +35,10 @@ export class ReportListPage {
 			}
 		});
 		return addModal.present();
+	}
+
+	public submit(report: Report): Promise<Report> {
+		return Promise.resolve(report);
 	}
 
 	public delete(report: Report): Promise<void> {
