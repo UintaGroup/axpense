@@ -13,7 +13,7 @@ export class SettingsService {
 		this._defaults = defaults;
 	}
 
-	load(): Promise<void> {
+	public load(): Promise<void> {
 		return this.storage.get(this.SETTINGS_KEY)
 			.then(value => {
 				if (value) {
@@ -26,28 +26,28 @@ export class SettingsService {
 			});
 	}
 
-	merge(settings: any) {
+	public merge(settings: any) {
 		for (let k in settings) {
 			this.settings[k] = settings[k];
 		}
 		return this.save();
 	}
 
-	setValue(key: string, value: any) {
+	public setValue(key: string, value: any) {
 		this.settings[key] = value;
 		return this.storage.set(this.SETTINGS_KEY, this.settings);
 	}
 
-	setAll(value: any) {
+	public setAll(value: any) {
 		return this.storage.set(this.SETTINGS_KEY, value);
 	}
 
-	getValue(key: string) {
+	public getValue(key: string) {
 		return this.storage.get(this.SETTINGS_KEY)
 			.then(settings => settings[key]);
 	}
 
-	save() {
+	public save() {
 		return this.setAll(this.settings);
 	}
 

@@ -70,7 +70,6 @@ export class ExpenseCreatePage extends BasePage {
 	private loadSettings(): Promise<any> {
 		return this._settingSrv.load()
 			.then(() => {this._options = this._settingSrv.allSettings;
-				console.log('OPTIONS', this._options);
 		})
 	}
 }

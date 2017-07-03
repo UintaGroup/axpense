@@ -4,10 +4,9 @@ import { DebugElement }             from '@angular/core';
 import { TestUtils } from '../../test';
 import { ReportListPage } from './report-list';
 import { ItemSliding, Modal, ModalController, NavController, } from 'ionic-angular';
-import { ModalMock, ModalControllerMock, NavControllerMock } from 'ionic-mocks';
+import { ModalMock, ModalControllerMock, NavControllerMock, ItemSlidingMock } from 'ionic-mocks';
 import { ReportService } from '../../providers';
 import { ReportServiceMock } from '../../mocks/report.service.mock';
-import { ItemSlidingMock } from '../../mocks/item-sliding.mock';
 import { Report } from '../../models/report.model';
 
 describe('ReportListPage', () => {

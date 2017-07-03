@@ -16,7 +16,7 @@ export class ReportCreatePage {
 	public formValid: boolean;
 	public form: FormGroup;
 
-	constructor(private viewCtrl: ViewController,
+	constructor(private _viewCtrl: ViewController,
 				formBuilder: FormBuilder,
 				settingsSrvc: SettingsService,
 				dateSrvc: DateService) {
@@ -25,18 +25,19 @@ export class ReportCreatePage {
 			.then(() => this.buildForm(formBuilder, dateSrvc, this._options.reportDuration));
 	}
 
-	cancel(): any {
-		this.viewCtrl.dismiss();
+	public cancel(): any {
+		return this._viewCtrl.dismiss();
 	}
 
-	submit(): any {
+	public submit(): any {
 		if (!this.form.valid) {
 			return;
 		}
-		return this.viewCtrl.dismiss(Report.create(this.form.value));
+		return this._viewCtrl.dismiss(Report.create(this.form.value));
 	}
 
-	buildForm(formBuilder: FormBuilder, dateService: DateService, dateOffset: number): any {
+	public buildForm(formBuilder: FormBuilder, dateService: DateService, dateOffset: number): any {
+
 		this.form = formBuilder.group({
 			name: ['', Validators.required],
 			created: [dateService.now(), Validators.required],
@@ -44,10 +45,10 @@ export class ReportCreatePage {
 			endDate: [dateService.addDays(dateOffset), Validators.required]
 		});
 
-		this.form.valueChanges.subscribe(v => this.formValid = this.form.valid);
+		this.form.valueChanges.subscribe(() => this.formValid = this.form.valid);
 	}
 
-	loadSettings(service: SettingsService): Promise<any> {
+	public loadSettings(service: SettingsService): Promise<any> {
 		return service.load()
 			.then(() => this._options = service.allSettings);
 	}
