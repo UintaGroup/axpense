@@ -11,7 +11,6 @@ import { FormBuilderMock } from '../../mocks/angular/form-builder.mock';
 import { SettingsServiceMock } from '../../mocks/settings.service.mock';
 import { DateServiceMock } from '../../mocks/date.service.mock';
 import { FormGroupMock } from '../../mocks/angular/form-group.mock';
-import { Observable } from 'rxjs/Observable';
 import { Report } from '../../models/report.model';
 
 describe('ReportCreatePage', () => {
@@ -36,7 +35,6 @@ describe('ReportCreatePage', () => {
 			settingsSrvc = SettingsServiceMock.instance();
 			dateSrvc = DateServiceMock.instance();
 
-
 			let providers: any[] = [
 				{provide: FormBuilder, useFactory: () => formBuilder},
 				{provide: SettingsService, useFactory: () => settingsSrvc},
@@ -55,7 +53,6 @@ describe('ReportCreatePage', () => {
 				});
 		}
 	));
-
 
 	it('should initialize', () => {
 
@@ -77,14 +74,13 @@ describe('ReportCreatePage', () => {
 	describe('submit', () => {
 
 		it('should dismiss with form Value', done => {
-			let newReport = Report.create(formVal);
+			let newReport: Report = Report.create(formVal);
 
 			classUnderTest.submit()
 				.then(() => {
 					expect(viewCtrl.dismiss).toHaveBeenCalledWith(newReport);
 					done();
 				});
-
 
 		});
 	});
