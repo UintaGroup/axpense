@@ -14,10 +14,10 @@ import { ConfigMock, FormMock, MenuControllerMock, PlatformMock, KeyboardMock } 
 import { TranslateServiceMock, TranslatePipeMock }                          from './mocks/ngx-translate';
 import { CommonModule }                                                     from './common';
 
-declare var __karma__: any;
-declare var require: any;
+declare let __karma__: any;
+declare let require: any;
 
-__karma__.loaded = function (): void {};
+__karma__.loaded = function (): void {/* */};
 
 getTestBed().initTestEnvironment(
 	BrowserDynamicTestingModule,
