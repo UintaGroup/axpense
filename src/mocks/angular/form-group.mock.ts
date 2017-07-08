@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 export class FormGroupMock {
 	public static instance(valid: boolean = true, value: any = {}): any {
 
-		let instance = jasmine.createSpyObj('FormGroup', [
+		let instance: any = jasmine.createSpyObj('FormGroup', [
 			'registerControl',
 			'addControl',
 			'removeControl',
