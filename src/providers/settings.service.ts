@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
+import { Storage }    from '@ionic/storage';
 
 @Injectable()
 export class SettingsService {
 
-	settings: any;
+	public settings: any[];
 
 	private _defaults: any;
 	private SETTINGS_KEY: string = '_settings';
@@ -26,36 +26,36 @@ export class SettingsService {
 			});
 	}
 
-	public merge(settings: any) {
+	public merge(settings: any): Promise<any> {
 		for (let k in settings) {
 			this.settings[k] = settings[k];
 		}
 		return this.save();
 	}
 
-	public setValue(key: string, value: any) {
+	public setValue(key: string, value: any): Promise<any> {
 		this.settings[key] = value;
 		return this.storage.set(this.SETTINGS_KEY, this.settings);
 	}
 
-	public setAll(value: any) {
+	public setAll(value: any): Promise<any> {
 		return this.storage.set(this.SETTINGS_KEY, value);
 	}
 
-	public getValue(key: string) {
+	public getValue(key: string): Promise<any> {
 		return this.storage.get(this.SETTINGS_KEY)
 			.then(settings => settings[key]);
 	}
 
-	public save() {
+	public save(): Promise<any> {
 		return this.setAll(this.settings);
 	}
 
-	get allSettings() {
+	get allSettings(): any[] {
 		return this.settings;
 	}
 
-	private mergeDefaults(defaults: any) {
+	private mergeDefaults(defaults: any): Promise<any> {
 		for (let k in defaults) {
 			if (!(k in this.settings)) {
 				this.settings[k] = defaults[k];
