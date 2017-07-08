@@ -1,6 +1,6 @@
 export class SettingsServiceMock {
 	public static instance(): any {
-		let instance = jasmine.createSpyObj('SettingsService', [
+		let instance: any = jasmine.createSpyObj('SettingsService', [
 			'load',
 			'merge',
 			'setAll',
