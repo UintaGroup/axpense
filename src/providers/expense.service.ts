@@ -10,12 +10,12 @@ export class ExpenseService {
 	constructor(private _db: LocalDb) {
 	}
 
-	all(reportId: number): Promise<Expense[]> {
+	public all(reportId: number): Promise<Expense[]> {
 		return this._db.queryWithArrayResult(`SELECT * FROM ${Expense.tableName} WHERE reportId = ?`, [reportId])
 			.then(rows => rows.map(row => Expense.create(row)));
 	}
 
-	save(report: Report, expense: Expense): Promise<Expense> {
+	public save(report: Report, expense: Expense): Promise<Expense> {
 		expense.reportId = report.id;
 
 		return this._db.insert(Expense.tableName, expense)
@@ -26,11 +26,11 @@ export class ExpenseService {
 			});
 	}
 
-	delete(expense: Expense): Promise<any> {
+	public remove(expense: Expense): Promise<any> {
 		return this._db.query(`DELETE FROM ${Expense.tableName} WHERE id = ?`, [expense.id]);
 	}
 
-	deleteAll(report: Report): Promise<any> {
+	public deleteAll(report: Report): Promise<any> {
 		return this._db.query(`DELETE FROM ${Expense.tableName} WHERE reportId = ?`, [report.id]);
 	}
 
