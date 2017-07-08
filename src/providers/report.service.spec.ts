@@ -45,7 +45,7 @@ describe('ReportService', () => {
 				.then(() => {
 					expect(db.insert).toHaveBeenCalledWith(Report.tableName, report);
 					done();
-				})
+				});
 		});
 	});
 
@@ -65,7 +65,7 @@ describe('ReportService', () => {
 				.then(() => {
 					expect(expenseSrvc.deleteAll).toHaveBeenCalledWith(report);
 					done();
-				})
+				});
 		});
 	});
 
