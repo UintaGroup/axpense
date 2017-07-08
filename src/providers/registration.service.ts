@@ -1,7 +1,7 @@
 import { Injectable }   from '@angular/core';
 import { Observable }   from 'rxjs';
 
-import { Api }          from './api';
+// import { Api }          from './api';
 import { Account }      from '../models';
 
 // const resourceKey: string = 'login';
@@ -9,9 +9,10 @@ import { Account }      from '../models';
 @Injectable()
 export class RegistrationService {
 
-	constructor(private _api: Api) {}
+	// TODO inject API when real registration api setup
+	// constructor(private _api: Api) {}
 
-	signUp(account: Account): Observable<Account> {
+	public signUp(account: Account): Observable<Account> {
 		return Observable.of(account);
 	}
 }
