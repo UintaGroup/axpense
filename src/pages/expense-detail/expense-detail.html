@@ -9,6 +9,7 @@
 <ion-content padding>
   <h2>{{ expense?.amount | currency: 'USD' : true : '.2-2' }}</h2>
   <p>{{ expense?.categoryId}}</p>
+  <p>{{ expense?.expenseDate }}</p>
   <p>{{ expense?.description }}</p>
   <img [src]="expense?.image"/>
 </ion-content>

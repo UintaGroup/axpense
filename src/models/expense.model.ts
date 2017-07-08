@@ -81,4 +81,14 @@ export class Expense {
 	public set merchant(value: string) {
 		this._merchant = value;
 	}
+
+
+	private _expenseDate: string;
+	public get expenseDate(): string {
+		return this._expenseDate;
+	}
+
+	public set expenseDate(value: string) {
+		this._expenseDate = value;
+	}
 }
