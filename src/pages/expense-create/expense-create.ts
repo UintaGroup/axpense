@@ -8,6 +8,7 @@ import { CategoryService }                      from '../../providers';
 import { BasePage }                             from '../base.page';
 import { LoggerService } from '../../providers/logger.service';
 import { SettingsService } from '../../providers/settings.service';
+import {DateService} from "../../common/providers/date-service";
 
 @Component({
 	selector: 'page-expense-create',
@@ -26,7 +27,8 @@ export class ExpenseCreatePage extends BasePage {
 				categorySrvc: CategoryService,
 				private _settingSrv: SettingsService,
 				private _loggerSrvc: LoggerService,
-				private _camera: Camera) {
+				private _camera: Camera,
+				dateSrvc: DateService) {
 		super();
 		this.categories$ = categorySrvc.all();
 		this.form = formBuilder.group({
@@ -34,7 +36,8 @@ export class ExpenseCreatePage extends BasePage {
 			amount: ['', Validators.required],
 			merchant: ['', Validators.required],
 			description: ['', Validators.required],
-			categoryId: ['', Validators.required]
+			categoryId: ['', Validators.required],
+			expenseDate: [dateSrvc.now(), Validators.required]
 		});
 		this.loadSettings();
 
