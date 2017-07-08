@@ -1,5 +1,4 @@
 import { async, ComponentFixture } from '@angular/core/testing';
-import { DebugElement }             from '@angular/core';
 import { ReportCreatePage } from './report-create';
 import { TestUtils } from '../../test';
 import { ViewController } from 'ionic-angular';
