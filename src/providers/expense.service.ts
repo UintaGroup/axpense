@@ -26,7 +26,7 @@ export class ExpenseService {
 			});
 	}
 
-	public remove(expense: Expense): Promise<any> {
+	public deleteOne(expense: Expense): Promise<any> {
 		return this._db.query(`DELETE FROM ${Expense.tableName} WHERE id = ?`, [expense.id]);
 	}
 
