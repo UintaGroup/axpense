@@ -6,7 +6,6 @@ export class Category {
 		}
 	}
 
-
 	private _ledgerAccount: string;
 	public get ledgerAccount(): string {
 		return this._ledgerAccount;
