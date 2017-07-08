@@ -1,9 +1,8 @@
-import { Injectable }      from '@angular/core';
-import { Storage }         from '@ionic/storage';
-import { IDbTable }        from '../models';
-import { QueryBuilderService } from './query-builder.service';
-import { QueryBuilder }    from '../models';
-import { RdbStore } from './rdb-store.service';
+import { Injectable }             from '@angular/core';
+import { Storage }                from '@ionic/storage';
+import { IDbTable, QueryBuilder } from '../models';
+import { QueryBuilderService }    from './query-builder.service';
+import { RdbStore }               from './rdb-store.service';
 
 @Injectable()
 export class LocalDb {
@@ -57,7 +56,7 @@ export class LocalDb {
 		return this._kvStore.clear();
 	}
 
-	public forEachKvp(callback: (value: any, key: string, index) => Promise<any>): Promise<void> {
+	public forEachKvp(callback: (value: any, key: string, index: number) => Promise<any>): Promise<void> {
 		return this._kvStore.forEach(callback);
 	}
 
@@ -65,9 +64,10 @@ export class LocalDb {
 		if (reset !== true) {
 			return Promise.resolve();
 		} else {
-			return this._kvStore.clear().then(() => Promise.all(tables
-				.filter(tables => reset)
-				.map(table => this.queryWithBuilder(this._queryBuilder.drop(table.name)))));
+			return this._kvStore.clear()
+				.then(() => Promise.all(
+					tables.filter(() => reset)
+					.map(table => this.queryWithBuilder(this._queryBuilder.drop(table.name)))));
 		}
 	}
 
@@ -97,7 +97,7 @@ export class LocalDb {
 
 	public insert(tableName: string, model: any): Promise<any> {
 		let table: IDbTable = this._tables.find(tbl => tbl.name === tableName);
-		let qb = this._queryBuilder.update(table, model);
+		let qb: QueryBuilder = this._queryBuilder.update(table, model);
 		return this.queryWithBuilder(qb);
 	}
 }
