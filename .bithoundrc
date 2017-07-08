@@ -1,9 +1,10 @@
-"test":[
-  'src/**/*.spec.ts',
-  'src/**/*.mock.ts',
-  'src/test.ts'
- ]
-"critics": {
-  "lint": {"engine": "tslint"}
+{
+  "test": [
+    "src/**/*.spec.ts",
+    "src/**/*.mock.ts",
+    "src/test.ts"
+  ],
+  "critics": {
+    "lint": {"engine": "tslint"}
+  }
 }
-
