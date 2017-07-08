@@ -1,5 +1,4 @@
 import { async, ComponentFixture } from '@angular/core/testing';
-import { DebugElement }             from '@angular/core';
 
 import { TestUtils } from '../../test';
 import { ReportListPage } from './report-list';
