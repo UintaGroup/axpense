@@ -1,7 +1,7 @@
 export class Expense {
 
-	public static create(obj: any): Expense{
-		let o = new Expense();
+	public static create(obj: any): Expense {
+		let o: Expense = new Expense();
 		for (let propName in obj) {
 			o['_' + propName] = obj[propName];
 		}
@@ -81,7 +81,6 @@ export class Expense {
 	public set merchant(value: string) {
 		this._merchant = value;
 	}
-
 
 	private _expenseDate: string;
 	public get expenseDate(): string {
