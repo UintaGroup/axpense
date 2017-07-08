@@ -3,18 +3,17 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class DateService {
 
-	raw(): any {
+	public raw(): any {
 		return new Date();
 	}
 
-	now(): string {
-		let now = this.raw();
+	public now(): string {
+		let now: Date = this.raw();
 		return now.toISOString();
-
 	}
 
-	addDays(days: number): string {
-		let end = this.raw();
+	public addDays(days: number): string {
+		let end: Date = this.raw();
 		end.setDate(end.getDate() + days);
 		return end.toISOString();
 	}
