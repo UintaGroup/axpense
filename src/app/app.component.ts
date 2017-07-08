@@ -1,5 +1,5 @@
 import { Component, ViewChild }                 from '@angular/core';
-import { Platform, Nav, Config, Events }        from 'ionic-angular';
+import { Platform, Nav, Config, Events, AlertController, Alert, AlertOptions }        from 'ionic-angular';
 import { StatusBar }                            from '@ionic-native/status-bar';
 import { SplashScreen }                         from '@ionic-native/splash-screen';
 import { TranslateService }                     from '@ngx-translate/core';
@@ -7,35 +7,36 @@ import { TranslateService }                     from '@ngx-translate/core';
 import { AuthService, LocalDb }                 from '../providers';
 import { AppEvents }                            from '../models';
 import { FIRST_RUN_PAGE, MAIN_PAGE }            from '../pages';
-import { SettingsPage, ReportListPage, SignupPage, LoginPage  } from '../pages';
+import { SettingsPage, ReportListPage, SignupPage, LoginPage } from '../pages';
 
 @Component({
-	template: `<ion-menu [content]="content">
-				<ion-header>
-					<ion-toolbar>
-						<ion-title>Pages</ion-title>
-					</ion-toolbar>
-				</ion-header>
+	template: `
+		<ion-menu [content]="content">
+			<ion-header>
+				<ion-toolbar>
+					<ion-title>Pages</ion-title>
+				</ion-toolbar>
+			</ion-header>
 
-				<ion-content>
-					<ion-list>
-						<ion-item menuClose *ngFor="let p of pages" (click)="openPage(p)">
-							<ion-icon name="{{p.icon}}"></ion-icon>
-								{{p.title | translate}}
-						</ion-item>
-					</ion-list>
-				</ion-content>
-				
-				<ion-footer>
-					<ion-list>
-						<ion-item menuClose (click)="logout()">
-							<ion-icon name="log-out"></ion-icon>
-							{{'BUTTON.LOGOUT' | translate }}
-						</ion-item>
-					</ion-list>
-				</ion-footer>
-			</ion-menu>
-<ion-nav #content [root]="rootPage"></ion-nav>`
+			<ion-content>
+				<ion-list>
+					<ion-item menuClose *ngFor="let p of pages" (click)="openPage(p)">
+						<ion-icon name="{{p.icon}}"></ion-icon>
+						{{p.title | translate}}
+					</ion-item>
+				</ion-list>
+			</ion-content>
+
+			<ion-footer>
+				<ion-list>
+					<ion-item menuClose (click)="logout()">
+						<ion-icon name="log-out"></ion-icon>
+						{{'BUTTON.LOGOUT' | translate }}
+					</ion-item>
+				</ion-list>
+			</ion-footer>
+		</ion-menu>
+		<ion-nav #content [root]="rootPage"></ion-nav>`
 })
 export class App {
 	public rootPage: Component = FIRST_RUN_PAGE;
@@ -56,7 +57,8 @@ export class App {
 		localDb: LocalDb,
 		events: Events,
 		translateSrvc: TranslateService,
-		private _authSrvc: AuthService) {
+		private _authSrvc: AuthService,
+		private _alertCtrl: AlertController) {
 
 		this.initializeTranslations(config, translateSrvc);
 		this.eventRegistration(events);
@@ -71,8 +73,21 @@ export class App {
 	}
 
 	public logout(): Promise<any> {
-
-		return this._authSrvc.logout();
+		let alert: Alert = this._alertCtrl.create({
+			title: 'Logout',
+			message: 'Logging out will delete all data on device',
+			buttons: [
+				{
+					text: 'Cancel',
+					role: 'cancel'
+				},
+				{
+					text: 'OK',
+					handler: () => { this._authSrvc.logout(); }
+				}
+			]
+		});
+		return alert.present();
 	}
 
 	private onReady(localDb: LocalDb, authSrvc: AuthService, statusBar: StatusBar, splashScreen: SplashScreen): Promise<any> {

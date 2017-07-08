@@ -6,6 +6,7 @@ import { SettingsServiceMock }  from './settings.service.mock';
 import { DateServiceMock }      from './date.service.mock';
 import { HeaderDirectiveMock }  from './header.directive.mock';
 import { DomControllerMock }    from './dom.controller.mock';
+import { AuthServiceMock }       from './auth.service.mock';
 
 export {
 	ReportServiceMock,
@@ -15,5 +16,6 @@ export {
 	SettingsServiceMock,
 	DateServiceMock,
 	HeaderDirectiveMock,
-	DomControllerMock
+	DomControllerMock,
+	AuthServiceMock
 }

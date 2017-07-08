@@ -1,6 +1,6 @@
-import { FirebaseServiceMock } from './firebase.service.mock';
+import { FirebaseServiceMock }  from './firebase.service.mock';
 
 export {
-	FirebaseServiceMock
+	FirebaseServiceMock,
 }
 
