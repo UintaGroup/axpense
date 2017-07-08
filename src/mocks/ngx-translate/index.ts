@@ -4,4 +4,4 @@ import { TranslatePipeMock }    from './translate.pipe.mock';
 export {
 	TranslateServiceMock,
 	TranslatePipeMock
-}
+};

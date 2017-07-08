@@ -4,4 +4,4 @@ import { FormGroupMock }    from './form-group.mock';
 export {
 	FormBuilderMock,
 	FormGroupMock
-}
+};
