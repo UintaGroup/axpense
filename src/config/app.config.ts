@@ -1,6 +1,7 @@
 import { OpaqueToken } from '@angular/core';
 
-export let APP_CONFIG = new OpaqueToken('app.config');
+// TODO fix deprecated OpaqueToken
+export let APP_CONFIG: OpaqueToken = new OpaqueToken('app.config');
 
 export interface AppConfig {
 	appSetting: string;
