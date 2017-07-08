@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Report } from '../../models/report.model';
+import { Component }            from '@angular/core';
+import { IonicPage, NavParams } from 'ionic-angular';
+import { Report }               from '../../models';
 
 @IonicPage()
 @Component({
@@ -10,14 +10,10 @@ import { Report } from '../../models/report.model';
 export class ReportDetailTabsPage {
 
 	public report: Report;
+	public reportHeaderTabRoot: Component = 'ReportHeaderTabPage';
+	public reportExpensesTabRoot: Component = 'ReportExpensesTabPage';
 
-	reportHeaderTabRoot = 'ReportHeaderTabPage'
-	reportExpensesTabRoot = 'ReportExpensesTabPage'
-
-
-	constructor(public navCtrl: NavController, navParams: NavParams) {
+	constructor(navParams: NavParams) {
 		this.report = navParams.get('report');
 	}
-
-
 }

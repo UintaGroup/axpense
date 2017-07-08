@@ -44,15 +44,16 @@ export class RdbStore {
 	 * @param {array} params the additional params to use for query placeholders
 	 * @return {Promise} that resolves or rejects with an object of the form { tx: Transaction, res: Result (or err)}
 	 */
+	// TODO - refactor
 	public query(query: string, params: any[] = []): Promise<any> {
-		// return this._db.transaction(tx =>
-		// 		tx.executeSql(query, params), err => this._logger.error(err), this._logger.log(query + ' completed')
-		// );
 		return new Promise((resolve, reject) => {
 			try {
 				return this.openConnection().then(() =>
-					this._db.transaction((tx: any) => {
-							tx.executeSql(query, params,
+					this._db.transaction(
+						(tx: any) => {
+							tx.executeSql(
+								query,
+								params,
 								(innerTx: any, res: any) => resolve({tx: innerTx, res: res}),
 								(innerTx: any, err: any) => reject({tx: innerTx, err: err}));
 						},
@@ -76,8 +77,9 @@ export class RdbStore {
 	}
 
 	public transaction(table: IDbTable, rows: any[], callback: (t: IDbTable, r: any[]) => QueryBuilder): Promise<any> {
-		return this._db.transaction(tx => Promise.all(rows.map(row => {
-				let qb = callback(table, row);
+		return this._db.transaction(
+			tx => Promise.all(rows.map(row => {
+				let qb: QueryBuilder = callback(table, row);
 				return tx.executeSql(qb.query, qb.queryArgs);
 			})),
 			err => this._logger.error(err),

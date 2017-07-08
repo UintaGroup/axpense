@@ -6,5 +6,8 @@
   ],
   "critics": {
     "lint": {"engine": "tslint"}
-  }
+  },
+  "ignore": [
+    "src/service-worker.js"
+  ]
 }

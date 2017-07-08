@@ -1,14 +1,12 @@
-import { App } from './app.component';
-import { StatusBar } from '@ionic-native/status-bar';
-import { TranslateService } from '@ngx-translate/core';
-import { AuthService } from '../providers/auth.service';
+import { App }                                                   from './app.component';
 import { Alert, AlertController, Config, Events, Nav, Platform } from 'ionic-angular';
-import { AlertMock, AlertControllerMock, ConfigMock, EventsMock, PlatformMock, StatusBarMock, NavMock, SplashScreenMock } from 'ionic-mocks';
-import { LocalDb } from '../providers/local-db.service';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { LocalDbMock } from '../mocks/local-db.service.mock';
-import { TranslateServiceMock } from '../mocks/ngx-translate/translate.service.mock';
-import { AuthServiceMock } from '../mocks/auth.service.mock';
+import { AlertMock, AlertControllerMock, ConfigMock, EventsMock, NavMock, PlatformMock, StatusBarMock, SplashScreenMock } from 'ionic-mocks';
+import { StatusBar }                                             from '@ionic-native/status-bar';
+import { SplashScreen }                                          from '@ionic-native/splash-screen';
+import { TranslateService }                                      from '@ngx-translate/core';
+import { TranslateServiceMock }                                  from '../mocks/ngx-translate';
+import { AuthService, LocalDb }                                  from '../providers';
+import { LocalDbMock, AuthServiceMock }                          from '../mocks';
 
 describe('App', () => {
 

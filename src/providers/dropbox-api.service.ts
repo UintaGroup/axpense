@@ -1,9 +1,8 @@
-import { Injectable, Inject } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Injectable, Inject }    from '@angular/core';
+import { Http, Response }        from '@angular/http';
+import { Observable }            from 'rxjs';
 import 'rxjs/add/operator/map';
 import { APP_CONFIG, AppConfig } from '../config/app.config';
-
 
 @Injectable()
 export class DropboxApi {
@@ -14,7 +13,7 @@ export class DropboxApi {
 		this._url = config.staticApiUrl;
 	}
 
-	get(endpoint: string): Observable<Response> {
+	public get(endpoint: string): Observable<Response> {
 		return this.http.get(this.buildUrl(endpoint));
 	}
 

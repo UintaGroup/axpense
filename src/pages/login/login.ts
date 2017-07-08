@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
-import { TranslateService } from '@ngx-translate/core';
+import { Component }              from '@angular/core';
+import { Toast, ToastController } from 'ionic-angular';
+import { TranslateService }       from '@ngx-translate/core';
 
-import { Credentials } from '../../models';
-import { AuthService } from '../../providers';
+import { Credentials }            from '../../models';
+import { AuthService }            from '../../providers';
 
 @Component({
 	selector: 'page-login',
@@ -18,16 +18,12 @@ export class LoginPage {
 
 	private loginErrorString: string;
 
-
-
-
-
 	constructor(private _authSrvc: AuthService,
 		private _toastCtrl: ToastController,
 		translateSrvc: TranslateService) {
 
 		translateSrvc
-			.get('LOGIN_ERROR')
+			.get('ERROR.LOGIN')
 			.subscribe(value => this.loginErrorString = value);
 	}
 
@@ -36,8 +32,8 @@ export class LoginPage {
 			.login(this.credentials)
 			.subscribe(
 				() => console.log(),
-				err => {
-					let toast = this._toastCtrl.create({
+				() => {
+					let toast: Toast = this._toastCtrl.create({
 						message: this.loginErrorString,
 						duration: 3000,
 						position: 'top'

@@ -1,5 +1,5 @@
-import { Injectable }       from '@angular/core';
-import { ToastController }  from 'ionic-angular';
+import { Injectable }              from '@angular/core';
+import { Toast, ToastController }  from 'ionic-angular';
 
 @Injectable()
 export class LoggerService {
@@ -27,7 +27,7 @@ export class LoggerService {
 	}
 
 	private toast(message: string, cssClass?: string): Promise<any> {
-		let toast = this._toastCtrl.create({
+		let toast: Toast = this._toastCtrl.create({
 			message: message,
 			duration: 3000,
 			position: 'top',

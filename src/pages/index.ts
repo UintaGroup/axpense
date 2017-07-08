@@ -1,5 +1,3 @@
-import { Component }            from '@angular/core';
-
 import { ReportListPage }       from './report-list/report-list';
 import { SettingsPage }         from './settings/settings';
 import { LoginPage }            from './login/login';

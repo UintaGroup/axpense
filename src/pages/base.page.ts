@@ -5,7 +5,7 @@ export class BasePage implements OnDestroy {
 
 	protected ngUnsubscribe: Subject<void> = new Subject<void>();
 
-	ngOnDestroy() {
+	public ngOnDestroy(): void {
 		this.ngUnsubscribe.next();
 		this.ngUnsubscribe.complete();
 	}

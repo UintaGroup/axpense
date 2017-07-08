@@ -39,10 +39,10 @@ export class ExpenseCreatePage extends BasePage {
 		});
 		this.loadSettings();
 
-		this.form.valueChanges.subscribe(v => this.formValid = this.form.valid);
+		this.form.valueChanges.subscribe(() => this.formValid = this.form.valid);
 	}
 
-	addReceipt(): Promise<void> {
+	public addReceipt(): Promise<void> {
 		return this._camera.getPicture({
 				quality: this._options.receiptImageQuality,
 				destinationType: this._camera.DestinationType.DATA_URL,
@@ -50,19 +50,19 @@ export class ExpenseCreatePage extends BasePage {
 				mediaType: this._camera.MediaType.PICTURE
 			})
 			.then(imageData => this.image = 'data:image/jpeg;base64,' + imageData)
-			.catch(err => this._loggerSrvc.error(err))
+			.catch(err => this._loggerSrvc.error(err));
 	}
 
-	cancel(): Promise<any> {
+	public cancel(): Promise<any> {
 		return this.viewCtrl.dismiss();
 	}
 
-	submit(): Promise<any>{
+	public submit(): Promise<any> {
 		if (!this.form.valid) {
 			return Promise.resolve();
 		} else {
-			let expense = Expense.create(this.form.value);
-			//TODO figure out more elegant solution to expense image.
+			let expense: Expense = Expense.create(this.form.value);
+			// TODO figure out more elegant solution to expense image.
 			expense.image = this.image;
 			return this.viewCtrl.dismiss(expense);
 		}
@@ -71,6 +71,6 @@ export class ExpenseCreatePage extends BasePage {
 	private loadSettings(): Promise<any> {
 		return this._settingSrv.load()
 			.then(() => {this._options = this._settingSrv.allSettings;
-		})
+		});
 	}
 }

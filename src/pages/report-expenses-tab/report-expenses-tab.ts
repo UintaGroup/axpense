@@ -45,7 +45,7 @@ export class ReportExpensesTabPage {
 	}
 
 	public delete(expense: Expense): Promise<any> {
-		return this._expenseSrvc.delete(expense)
+		return this._expenseSrvc.deleteOne(expense)
 			.then(() => this.loadExpenses(this.report.id));
 	}
 
