@@ -1,13 +1,13 @@
-import { Component, ViewChild }                 from '@angular/core';
-import { Platform, Nav, Config, Events, AlertController, Alert, AlertOptions }        from 'ionic-angular';
-import { StatusBar }                            from '@ionic-native/status-bar';
-import { SplashScreen }                         from '@ionic-native/splash-screen';
-import { TranslateService }                     from '@ngx-translate/core';
+import { Component, ViewChild }                                  from '@angular/core';
+import { Platform, Nav, Config, Events, AlertController, Alert } from 'ionic-angular';
+import { StatusBar }                                             from '@ionic-native/status-bar';
+import { SplashScreen }                                          from '@ionic-native/splash-screen';
+import { TranslateService }                                      from '@ngx-translate/core';
 
-import { AuthService, LocalDb }                 from '../providers';
-import { AppEvents }                            from '../models';
-import { FIRST_RUN_PAGE, MAIN_PAGE }            from '../pages';
-import { SettingsPage, ReportListPage, SignupPage, LoginPage } from '../pages';
+import { AuthService, LocalDb }                                  from '../providers';
+import { AppEvents }                                             from '../models';
+import { FIRST_RUN_PAGE, MAIN_PAGE }                             from '../pages';
+import { SettingsPage, ReportListPage, SignupPage, LoginPage }   from '../pages';
 
 @Component({
 	template: `
