@@ -25,7 +25,8 @@ export const TABLES: any[] = [
 			{ name: 'image', type: 'TEXT' },
 			{ name: 'merchant', type: 'TEXT' },
 			{ name: 'description', type: 'TEXT' },
-			{ name: 'created', type: 'TEXT' }
+			{ name: 'created', type: 'TEXT' },
+			{ name: 'expenseDate', type: 'TEXT' }
 		]
 	}
 ];
