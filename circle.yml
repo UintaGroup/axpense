@@ -9,3 +9,5 @@ dependencies:
     - npm install -g ionic cordova @angular/cli
   post:
     - ionic state clear
+test:
+  post: ./node_modules/.bin/codecov
