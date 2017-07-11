@@ -1,58 +1,66 @@
 <ion-header>
 
-	<ion-navbar>
-		<button ion-button menuToggle="left">
-			<ion-icon name="menu"></ion-icon>
-		</button>
-		<ion-title>{{ 'TITLE.REPORT_LIST' | translate }}</ion-title>
-		<ion-buttons end>
-			<button ion-button icon-only (click)="add()">
-				<ion-icon name="add"></ion-icon>
-			</button>
-		</ion-buttons>
-	</ion-navbar>
+    <ion-navbar>
+        <button ion-button menuToggle="left">
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>{{ 'TITLE.REPORT_LIST' | translate }}</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="add()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
 
 </ion-header>
 
 <ion-content>
 
-	<ion-list>
-		<ion-item *ngIf="((reports | async)?.length < 1) || !reports">
-			<empty-list-prompt text="{{'CONTENT.REPORTS_LIST.EMPTY' | translate}}"></empty-list-prompt>
-		</ion-item>
-		<ion-item-sliding *ngFor="let r of reports | async" #slideItem>
-			<button ion-item (click)="open(r)">
-				<ion-row>
-					<ion-col>
-						<h2>{{r.name}}</h2>
-					</ion-col>
-					<ion-col text-right>
-						<report-status-badge [status]="r.status"></report-status-badge>
-					</ion-col>
-				</ion-row>
-				<ion-row>
-					<p>{{r.startDate | date: 'yyyy/MM/dd'}} - {{r.endDate | date: 'yyyy/MM/dd'}}</p>
-					<ion-note item-right *ngIf="r.description">{{r.description}}</ion-note>
-				</ion-row>
-			</button>
+    <ion-list>
+        <ion-item *ngIf="((reports | async)?.length < 1) || !reports">
+            <empty-list-prompt text="{{'CONTENT.REPORTS_LIST.EMPTY' | translate}}"></empty-list-prompt>
+        </ion-item>
+        <ion-item-sliding *ngFor="let r of reports | async" #slideItem>
+            <button ion-item (click)="open(r)">
+                <ion-row>
+                    <ion-col>
+                        <h2>{{r.name}}</h2>
+                    </ion-col>
+                    <ion-col text-right>
+                        <report-status-badge [status]="r.status"></report-status-badge>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <p>{{r.startDate | date: 'yyyy/MM/dd'}} - {{r.endDate | date: 'yyyy/MM/dd'}}</p>
+                    </ion-col>
+                    <ion-col text-right>
+                        <report-total [report]="r"></report-total>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-note item-right *ngIf="r.description">{{r.description}}</ion-note>
+                </ion-row>
+            </button>
 
-			<ion-item-options>
-				<button ion-button *ngIf="r.processing" color="light">
-					<ion-spinner color="busy"></ion-spinner>
-					{{ 'LABEL.SENDING' | translate }}
-				</button>
-				<button *ngIf="r.status === 0 && !r.processing" ion-button color="primary" (click)="submit(r, slideItem)">
-						<ion-icon name="send"></ion-icon>
-						{{ 'BUTTON.SUBMIT' | translate }}
-				</button>
+            <ion-item-options>
+                <button ion-button *ngIf="r.processing" color="light">
+                    <ion-spinner color="busy"></ion-spinner>
+                    {{ 'LABEL.SENDING' | translate }}
+                </button>
+                <button *ngIf="r.status === 0 && !r.processing" ion-button color="primary"
+                        (click)="submit(r, slideItem)">
+                    <ion-icon name="send"></ion-icon>
+                    {{ 'BUTTON.SUBMIT' | translate }}
+                </button>
 
-				<button *ngIf="r.status === 0" ion-button color="danger" (click)="delete(r)">
-					<ion-icon name="trash"></ion-icon>
-					{{ 'BUTTON.DELETE' | translate }}
-				</button>
+                <button *ngIf="r.status === 0" ion-button color="danger" (click)="delete(r)">
+                    <ion-icon name="trash"></ion-icon>
+                    {{ 'BUTTON.DELETE' | translate }}
+                </button>
 
-			</ion-item-options>
-		</ion-item-sliding>
-	</ion-list>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
 
 </ion-content>

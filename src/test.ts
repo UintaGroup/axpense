@@ -12,6 +12,7 @@ import { App, Config, Form, IonicModule, Keyboard, Platform }               from
 import { DomController, MenuController, GestureController }                 from 'ionic-angular';
 import { ConfigMock, FormMock, MenuControllerMock, PlatformMock, KeyboardMock }   from 'ionic-mocks/src';
 import { TranslateServiceMock, TranslatePipeMock }                          from './mocks/ngx-translate';
+import { ReportTotalComponentMock }                                         from './mocks/report-total.component.mock';
 import { CommonModule }                                                     from './common';
 
 declare let __karma__: any;
@@ -58,7 +59,7 @@ export class TestUtils {
 
 		return TestBed.configureTestingModule({
 				imports: [IonicModule, CommonModule],
-				declarations: [components, TranslatePipeMock ],
+				declarations: [components, TranslatePipeMock, ReportTotalComponentMock ],
 				providers: providers
 			});
 	}

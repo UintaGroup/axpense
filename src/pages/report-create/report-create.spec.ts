@@ -53,6 +53,10 @@ describe('ReportCreatePage', () => {
 		}
 	));
 
+	afterEach(() => {
+		fixture.destroy();
+	});
+
 	it('should initialize', () => {
 
 		expect(classUnderTest).toBeDefined();

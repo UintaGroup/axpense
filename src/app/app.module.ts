@@ -11,9 +11,10 @@ import { CommonModule }                             from '../common';
 import { App }                                      from './app.component';
 import { NATIVE_PLUGINS }                           from './plugins';
 import { PAGES }                                    from '../pages';
-import { APP_PROVIDERS, SettingsService, RdbStore, LocalDb, QueryBuilderService } from '../providers';
-import { TABLES }                                   from '../config/db.config';
 import { APP_CONFIG, CONFIG }                       from '../config/app.config';
+import { APP_PROVIDERS, SettingsService, RdbStore, LocalDb, QueryBuilderService } from '../providers';
+import { APP_COMPONENTS }                           from '../components';
+import { TABLES }                                   from '../config/db.config';
 
 export function createTranslateLoader(http: Http): TranslateHttpLoader {
 	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -60,7 +61,7 @@ export function providers(): Provider[] {
 }
 
 @NgModule({
-	declarations: [App, PAGES],
+	declarations: [App, PAGES, APP_COMPONENTS],
 	imports: [
 		BrowserModule,
 		CommonModule,
@@ -79,7 +80,7 @@ export function providers(): Provider[] {
 		})
 	],
 	bootstrap: [IonicApp],
-	entryComponents: [App, PAGES],
+	entryComponents: [App, PAGES, APP_COMPONENTS],
 	providers: providers()
 })
 export class AppModule {

@@ -6,8 +6,7 @@ import { Category }     from '../models';
 @Injectable()
 export class CategoryService {
 
-	constructor(private _api: DropboxApi) {
-	}
+	constructor(private _api: DropboxApi) {}
 
 	public all(): Observable<Category[]> {
 		// TODO - translate error message

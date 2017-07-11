@@ -62,15 +62,16 @@ export class ExpenseCreatePage extends BasePage {
 			return Promise.resolve();
 		} else {
 			let expense: Expense = Expense.create(this.form.value);
-			// TODO figure out more elegant solution to expense image.
+		// 	TODO figure out more elegant solution to expense image.
 			expense.image = this.image;
 			return this.viewCtrl.dismiss(expense);
 		}
 	}
 
 	private loadSettings(): Promise<any> {
-		return this._settingSrv.load()
-			.then(() => {this._options = this._settingSrv.allSettings;
-		});
+		// return this._settingSrv.load()
+		// 	.then(() => {this._options = this._settingSrv.allSettings;
+		// });
+		return Promise.resolve();
 	}
 }
