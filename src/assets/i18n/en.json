@@ -54,7 +54,8 @@
       "REPORT_DURATION": "Default Duration (days)",
       "RECEIPT": "Receipts",
       "RECEIPT_IMAGE_QUALITY": "Image Quality",
-      "RECEIPT_SAVE_GALLERY": "Save to Gallery"
+      "RECEIPT_SAVE_GALLERY": "Save to Gallery",
+      "CreatedDate": "Created Date"
     }
   },
   "CONTENT": {
