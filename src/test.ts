@@ -10,7 +10,7 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting }       from
 import { TranslateService }                                                 from '@ngx-translate/core';
 import { App, Config, Form, IonicModule, Keyboard, Platform }               from 'ionic-angular';
 import { DomController, MenuController, GestureController }                 from 'ionic-angular';
-import { ConfigMock, FormMock, MenuControllerMock, PlatformMock, KeyboardMock }   from 'ionic-mocks/src';
+import { ConfigMock, FormMock, MenuControllerMock, PlatformMock, KeyboardMock }   from 'ionic-mocks';
 import { TranslateServiceMock, TranslatePipeMock }                          from './mocks/ngx-translate';
 import { ReportTotalComponentMock }                                         from './mocks/report-total.component.mock';
 import { CommonModule }                                                     from './common';
