@@ -55,7 +55,8 @@
       "RECEIPT": "Receipts",
       "RECEIPT_IMAGE_QUALITY": "Image Quality",
       "RECEIPT_SAVE_GALLERY": "Save to Gallery"
-    }
+    },
+    "EXPENSE_CREATED_DATE": "Created Date"
   },
   "CONTENT": {
     "REPORTS_LIST": {
